@@ -39,6 +39,9 @@
             color: #615d5d;
             border-left: .25em solid #bdb5b5;
         }
+        a {
+            color: #0969da
+        }
 
         .logo {
             font-size: 2rem;
@@ -1086,6 +1089,39 @@ spec:
                 <!-- <p class="section-subtitle">ConScan leverages well-established open-source security and compliance tools</p> -->
 
                 <h3 id="github-action">Integration With Github Action</h3>
+                <p class="para-content">
+                    We can easily use this conscan tool with github action. With the github action the html reports are generated and these reports can be published directly to GitHub Pages using GitHub Actions, no manual steps required 🚀.
+                </p>
+                
+                <p>This makes it super easy to:</p>
+                <div style="padding-left: 30px;">
+                    <p>✅ Automate container image vulnerability scans</p>
+                    <p>✅ Host & share scan results securely</p>
+                    <p>✅ Integrate with your CI/CD workflow seamlessly</p>
+                </div>
+
+                <br>
+                <p>Here’s a quick example of how it works:</p>
+                <ul style="padding-left: 30px;">
+                    <li>Actions runs on each push</li> 
+                    <li>conscan scans all container images</li>
+                    <li>Reports are committed and published automatically to the eg. gh-pages branch</li>
+                    <li>Accessible instantly at GitHub Pages link.</li>
+                </ul>
+                
+                <br>    
+                <p class="para-content">
+                    I have setup <a href="https://github.com/peek8/conscan-sample">a github repo named conscan-sample</a> where we are building some sample images (those images doesn't have any real use case, just for testing) 
+                    and scanning them with <a href="https://github.com/peek8/conscan">conscan tool</a> and publish the report to github pages.
+                    For more details, See the scan Job and update-index Job at the <a href="https://github.com/peek8/conscan-sample/blob/main/.github/workflows/build.yaml#L63-L111">github action workflows at conscan-sample repo</a>.
+
+                    The generated reports are available at <a href="https://peek8.github.io/conscan-sample/conscan-reports/">Conscan-sample Github Pages</a>.
+               </p>
+               <p class="para-content">
+                    Isn't it awesome, You can actually do a lot without doing almost anything (other than copy/paste) :).
+                    <br>
+                    Cheers, Happy Scanning !! 🎉 🎉
+               </p>
 
             </div>
         </section>

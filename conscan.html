@@ -46,6 +46,9 @@
             color: #1a1a1a;
             text-decoration: none;
         }
+        .code {
+            color: #716e6e;
+        }
 
         .nav-links {
             display: flex;
@@ -186,6 +189,11 @@
             padding: 0 5%;
         }
 
+        .container h4 {
+            padding-top: 30px;
+            font-size: 1.10em;
+        }
+
         .hero {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             padding: 60px 0;
@@ -252,7 +260,7 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 30px 0;
             scroll-margin-top: 80px;
         }
 
@@ -321,7 +329,7 @@
         }
 
         .why-conscan {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: linear-gradient(135deg, #ceece6 0%, #f8fefa 100%);
             border-radius: 16px;
             padding: 3rem;
             margin: 3rem 0;
@@ -372,8 +380,10 @@
         }
 
         .code-block {
-            background: #1a1a1a;
-            color: #10b981;
+            /* background: #1a1a1a;
+            color: #10b981; */
+            background: #333131;
+            color: #f1f3f4;
             padding: 1.5rem;
             border-radius: 8px;
             font-family: 'Courier New', monospace;
@@ -567,7 +577,7 @@
                     <li><a href="#github-action" class="sidebar-link submenu-link">Integration With Github Action</a></li>
                 </ul>
             </li>
-            <!-- <li><a href="#kubernetes" class="sidebar-link">Kubernetes</a></li> -->
+            <li><a href="#cli-ref" class="sidebar-link">CLI Reference</a></li>
             <li><a href="#license" class="sidebar-link">License</a></li>
         </ul>
     </aside>
@@ -740,7 +750,7 @@
         <!-- Installation -->
         <section id="installation">
             <div class="container">
-                <h2 class="section-title">Installation</h2>
+                <h2 class="section-title">Getting Started</h2>
                 <p class="section-subtitle">Multiple installation options to fit your workflow</p>
 
                 <div id="binary-install" style="scroll-margin-top: 100px;">
@@ -836,43 +846,6 @@ $ docker run --rm -it \
 
 <span class="comment"># Available scanners: vuln, secret, package, cis, storage</span>
                 </div>
-                <div class="code-block">
-                    <pre>
-$ bin/conscan scan -h
-Scan a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and check CIS(Center for Internet Security) Benchmarks.
-
-Examples:
-# Scan a container image locally available
-$ conscan scan yourimage:tag          // uses the Podman/Docker daemon for local images
-
-# Scan container images from registry eg. dockerhub
-$ conscan scan docker.io/yourimage:tag
-
-# or from github image repo
-$ conscan scan ghcr.io/yourimage:tag
-
-# By default the scan report will be in Table format that is more convenient for the Console output. 
-# If you want the report in json format, you can use
-$ conscan scan --format json -o report.json yourimage:tag # the report will be saved to report.json
-
-# Similary to save in html format:
-$ conscan scan --format html -o report.html yourimage:tag
-
-# By default, conscan will scan everything. If you are interested for specific scan report, eg only vulnerabilities and exposed secrets you can use like:
-$ conscan scan --scanners=vuln,secret yourimage:tag
-
-Usage:
-  conscan scan [flags]
-
-Flags:
-  -f, --format string      Format of the scanning report (default "table")
-  -h, --help               help for scan
-  -o, --output string      Output File name (optional)
-      --scanners strings   Comma-separated list of what type of scans to be performed (allowed values: [vuln secret package cis storage all]).
-                           By default, Every scan is performed. Except for 'table format', "Scanning" Packages is  excluded for the sake of brevity while the report is not written to Console (default [all])   
-                    </pre>
-                </div>
-
                 <h3 style="margin: 2rem 0 1rem;">Output Formats</h3>
                 <div class="output-formats">
                     <div class="format-card">
@@ -918,7 +891,7 @@ Flags:
 
 
 
-        <!-- Technology Stack -->
+        <!-- Private Registry -->
         <section class="section-light" id="private-registry">
             <div class="container">
                 <h2 class="section-title">Scanning Private Registries</h2>
@@ -990,7 +963,7 @@ $ conscan scan registry.example.com/your-image:tag
                     </pre>
                 </div>
 
-                <h3>Registry Credentials in Container</h3>
+                <h3 id="container-credentials">Registry Credentials in Container</h3>
                 <p class="para-content">
                    If you want to use docker/podman to scan some images from private registry, the easy way would be to mount the docker config.json into container.
                    For example, in some linux machine:     
@@ -1019,16 +992,153 @@ $ docker run --rm -it \
                     </pre>
                 </div>
 
-                <h3>Registry Credentials in Kubernetes</h3>
+                <h3 id="kube-credentials">Registry Credentials in Kubernetes</h3>
                 <h4>Use Simple Secret</h4>
                 <p class="para-content">
+                    You can create a Secret using the above mentioned ~/.docker/config.json. And mount that secret in the conscan container.
                 </p>
+
+                <p>Create secret secret.yaml using <i class="code">config.json:</i></p>
+                <div class="code-block">
+                    <pre>
+apiVersion: v1
+kind: Secret
+metadata:
+    name: registry-config
+    namespace: awesomeapp
+data:
+    config.json: (base64 encoded config.json)                      
+                    </pre>
+                </div>
+                
+                <p>Apply it:</p>
+                <div class="code-block">
+                    <pre>
+$ kubectl apply -f secret.yaml
+                    </pre>
+                </div>
+
+                <p>Create your pod running conscan. The config.json file needs to be mounted at /.docker/config.json. here's pod.yaml:</p>
+                <div class="code-block">
+                    <pre>
+$ kubectl apply -f secret.yaml
+                    </pre>
+                </div>
+
+
+                <p>Apply pod.yaml</p>
+                <div class="code-block">
+                    <pre>
+$ kubectl apply -f pod.yaml
+                    </pre>
+                </div>
+                <blockquote>
+                    Note: At args section of pod, you can add --format to get different formats than table eg. --format json for json format. And to save it to a file use --output.
+                </blockquote>
+
 
                 <h4>Use Image Pull Secret</h4>
                 <p class="para-content">
+                    You can also create secret of type kubernetes.io/dockerconfigjson that can be used in Pod at imagePullSecrets field.
                 </p>
+                <p>The secret would be in format:</p>
+                <div class="code-block">
+                    <pre>
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+  namespace: awesomeapps
+data:
+  .dockerconfigjson: UmVhbGx5IHJlYWxseSByZWVlZWVlZWVlZWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGx5eXl5eXl5eXl5eXl5eXl5eXl5eSBsbGxsbGxsbGxsbGxsbG9vb29vb29vb29vb29vb29vb29vb29vb29vb25ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubmdnZ2dnZ2dnZ2dnZ2dnZ2dnZ2cgYXV0aCBrZXlzCg==
+type: kubernetes.io/dockerconfigjson
+                    </pre>
+                </div>
 
+                <p class="para-content">
+                    And the pod.yaml will be like:
+                </p>
+                <div class="code-block">
+                    <pre>
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - image: ghcr.io/peek8/conscan:latest 
+    name: conscan-private-registry
+  imagePullSecrets:
+  - name: regcred
+                    </pre>
+                </div>
+                <p class="para-content">
+                   See more about using imagePullSecrets at <a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/">Kubernetes Private Registry doc.</a>
+                </p>
                 
+            </div>
+        </section>
+
+        <!-- CI/CD -->
+        <section class="section-light" id="cicd">
+            <div class="container">
+                <h2 class="section-title">CI/CD Integration</h2>
+                <!-- <p class="section-subtitle">ConScan leverages well-established open-source security and compliance tools</p> -->
+
+                <h3 id="github-action">Integration With Github Action</h3>
+
+            </div>
+        </section>
+
+        <!-- CLI Reference -->
+        <section class="section-light" id="cli-ref">
+            <div class="container">
+                <h2 class="section-title">CLI Referece</h2>
+                <!-- <p class="section-subtitle">ConScan is licensed under <a href="https://github.com/peek8/conscan/blob/main/LICENSE">Apache 2.0 license.</a></p> -->
+                 <div class="code-block">
+                    <pre>
+$ bin/conscan scan -h
+Scan a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and check CIS(Center for Internet Security) Benchmarks.
+
+Examples:
+# Scan a container image locally available
+$ conscan scan yourimage:tag          // uses the Podman/Docker daemon for local images
+
+# Scan container images from registry eg. dockerhub
+$ conscan scan docker.io/yourimage:tag
+
+# or from github image repo
+$ conscan scan ghcr.io/yourimage:tag
+
+# By default the scan report will be in Table format that is more convenient for the Console output. 
+# If you want the report in json format, you can use
+$ conscan scan --format json -o report.json yourimage:tag # the report will be saved to report.json
+
+# Similary to save in html format:
+$ conscan scan --format html -o report.html yourimage:tag
+
+# By default, conscan will scan everything. If you are interested for specific scan report, eg only vulnerabilities and exposed secrets you can use like:
+$ conscan scan --scanners=vuln,secret yourimage:tag
+
+Usage:
+  conscan scan [flags]
+
+Flags:
+  -f, --format string      Format of the scanning report (default "table")
+  -h, --help               help for scan
+  -o, --output string      Output File name (optional)
+      --scanners strings   Comma-separated list of what type of scans to be performed (allowed values: [vuln secret package cis storage all]).
+                           By default, Every scan is performed. Except for 'table format', "Scanning" Packages is  excluded for the sake of brevity while the report is not written to Console (default [all])   
+                    </pre>
+                </div> 
+            </div>
+        </section>
+
+        <!-- License -->
+        <section class="section-light" id="license">
+            <div class="container">
+                <h2 class="section-title">License</h2>
+                <p class="section-subtitle">ConScan is licensed under <a href="https://github.com/peek8/conscan/blob/main/LICENSE">Apache 2.0 license.</a></p>
             </div>
         </section>
 

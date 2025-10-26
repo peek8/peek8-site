@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>ConScan - Container Security Scanner | Peek8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        blockquote {
+            padding: 0 1em;
+            color: #615d5d;
+            border-left: .25em solid #bdb5b5;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.75rem 1.25rem;
+            color: #4b5563;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background: #f9fafb;
+            color: #1a1a1a;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 250px;
+            height: calc(100vh - 80px);
+            background: #f9fafb;
+            border-right: 1px solid #e5e7eb;
+            padding: 2rem 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-menu > li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-submenu {
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0.5rem 0;
+        }
+
+        .sidebar-submenu li {
+            margin-bottom: 0.25rem;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .submenu-link {
+            padding: 0.5rem 1.5rem 0.5rem 2.5rem !important;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .sidebar-menu a:hover {
+            background: #f0f9ff;
+            color: #1a1a1a;
+            border-left-color: #3b82f6;
+        }
+
+        .sidebar-menu a.active {
+            background: #f0f9ff;
+            color: #1a1a1a;
+            border-left-color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1a1a1a;
+            border: 2px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            border-color: #1a1a1a;
+        }
+
+        section {
+            padding: 80px 0;
+            scroll-margin-top: 80px;
+        }
+
+        h2, h3, h4 {
+            scroll-margin-top: 150px; /* add slightly more than header height */
+        }
+
+        .section-light {
+            background: #fafbfc;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 3rem;
+        }
+
+        .para-content {
+            color: #4b5563; 
+            font-size: 1.125rem; 
+            line-height: 1.8; 
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .why-conscan {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .why-item {
+            margin-bottom: 2rem;
+        }
+
+        .why-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .why-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .why-item p {
+            color: #4b5563;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .tool-card h4 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .tool-card p {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            color: #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .code-block .comment {
+            display: block;
+            color: #6b7280;
+        }
+
+        .code-block .prompt {
+            color: #94a3b8;
+        }
+
+        .usage-tabs {
+            display: none;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: none;
+        }
+
+        .output-formats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .format-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .format-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .format-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .format-card li {
+            padding: 0.5rem 0;
+            color: #6b7280;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .format-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .integration-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        footer {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            border-top: 1px solid #cbd5e1;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #1a1a1a;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            left: 1rem;
+            top: 100px;
+            z-index: 1002;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .tool-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- <a href="index.html" class="logo">peek8</a> -->
+        <a href="index.html"><img src="./logo.png" width="100px"></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li class="dropdown">
+                <span class="dropdown-toggle">Product ▾</span>
+                <ul class="dropdown-menu">
+                    <li><a href="#">ConScan</a></li>
+                </ul>
+            </li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="mailto:contact@peek8.com">Contact</a></li>
+        </ul>
+    </nav>
+
+    <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</button>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="#overview" class="sidebar-link">Overview</a></li>
+            <li><a href="#why-conscan" class="sidebar-link">Why ConScan?</a></li>
+            <li><a href="#features" class="sidebar-link">Key Features</a></li>
+            <li><a href="#technology" class="sidebar-link">Technology Stack</a></li>
+            <li><a href="#installation" class="sidebar-link" onclick="toggleMenu(this)">Getting Started ▾</a>
+                <ul class="sidebar-submenu">
+                    <li><a href="#binary-install" class="sidebar-link submenu-link">Binary Install</a></li>
+                    <li><a href="#docker-install" class="sidebar-link submenu-link">Docker</a></li>
+                    <li><a href="#dependencies" class="sidebar-link submenu-link">Dependencies</a></li>
+                </ul>
+            </li>
+            <li><a href="#usage" class="sidebar-link">Usage Guide</a></li>
+            <li><a href="#private-registry" class="sidebar-link" onclick="toggleMenu(this)">Private Registries ▾</a>
+                <ul class="sidebar-submenu">
+                    <li><a href="#local-credentials" class="sidebar-link submenu-link">Local Registry Credentials</a></li>
+                    <li><a href="#container-credentials" class="sidebar-link submenu-link">Registry Credentials in Container</a></li>
+                    <li><a href="#kube-credentials" class="sidebar-link submenu-link">Registry Credentials in Kubernetes</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#cicd" class="sidebar-link" onclick="toggleMenu(this)">CI/CD Integration ▾</a>
+                <ul class="sidebar-submenu">
+                    <li><a href="#github-action" class="sidebar-link submenu-link">Integration With Github Action</a></li>
+                </ul>
+            </li>
+            <!-- <li><a href="#kubernetes" class="sidebar-link">Kubernetes</a></li> -->
+            <li><a href="#license" class="sidebar-link">License</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="overview">
+            <div class="container">
+                <h1>
+                    <img src="conscan-logo.png" alt="conscan" style="width:40px; vertical-align:middle;">
+                    ConScan
+                    </h1>
+                
+                <p class="tagline">Secure, lean, and compliant containers made simple</p>
+                <p>A lightweight yet powerful container image scanning tool that helps you secure and optimize your container workloads. Analyze container images for security risks, misconfigurations, and inefficiencies before deploying to production.</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/peek8/conscan" class="btn btn-primary" target="_blank">View on GitHub</a>
+                    <a href="#installation" class="btn btn-secondary">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is ConScan -->
+        <section>
+            <div class="container">
+                <h2 class="section-title">What is ConScan?</h2>
+                <p class="section-subtitle">ConScan is a comprehensive container security scanner that provides actionable insights to keep your containers secure, lean, and compliant.</p>
+                
+                <p class="para-content">
+                    With ConScan, you can detect vulnerabilities in OS packages and application dependencies, identify exposed secrets inside images, generate SBOM (Software Bill of Materials) for transparency and compliance, spot inefficient file storage that bloats images, validate container security against CIS Benchmarks, and export results in JSON, table, or HTML formats for easy integration and reporting.
+                </p>
+
+                <p style="color: #4b5563; font-size: 1.125rem; line-height: 1.8;">
+                    By integrating ConScan into your CI/CD pipeline, you can shift security left and ensure your containers are secure, lean, and compliant from the very beginning.
+                </p>
+            </div>
+        </section>
+
+        <!-- Why ConScan -->
+        <section class="section-light" id="why-conscan">
+            <div class="container">
+                <h2 class="section-title">Why ConScan?</h2>
+                
+                <div class="why-conscan">
+                    <div class="why-item">
+                        <h3>🔀 Unified Workflow</h3>
+                        <p>No more juggling multiple tools. ConScan provides a single interface to multiple best-in-class scanners, eliminating fragmented workflows.</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <h3>📑 Consistent Reporting</h3>
+                        <p>Output formats and structures are normalized across all scans, making it easier to integrate results into CI/CD pipelines or share with teams.</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <h3>🖥 Developer-First Experience</h3>
+                        <p>Simplified setup and intuitive CLI that reduces the learning curve for new users. No need to remember multiple command flags or combine results from different scanners.</p>
+                    </div>
+                    
+                    <div class="why-item">
+                        <h3>📦 One-Stop Scanning</h3>
+                        <p>Run a single command against an image and get everything — vulnerabilities, SBOM, secrets, CIS checks, and efficiency hints.</p>
+                    </div>
+                </div>
+
+                <p style="text-align: center; font-size: 1.25rem; color: #1a1a1a; font-weight: 600; margin-top: 2rem;">
+                    👉 ConScan doesn't try to reinvent the wheel — it puts the best wheels together on one car. 🚗💨
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section id="features">
+            <div class="container">
+                <h2 class="section-title">Key Features</h2>
+                <p class="section-subtitle">Comprehensive security scanning powered by industry-leading tools</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Vulnerability Scanning</h3>
+                        <p>Scans OS packages and software dependencies against known vulnerabilities using multiple databases for comprehensive coverage.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Secret Detection</h3>
+                        <p>Detects API keys, tokens, and other sensitive information accidentally embedded in images to prevent credential leaks.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <h3>SBOM Generation</h3>
+                        <p>Produces a detailed Software Bill of Materials (SBOM) for complete visibility into all components in use.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Storage Analysis</h3>
+                        <p>Highlights large or unnecessary files that increase image size, helping you create leaner container images.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>CIS Benchmarks</h3>
+                        <p>Validates images against Center for Internet Security (CIS) recommendations to ensure best practices.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Multiple Output Formats</h3>
+                        <p>Supports JSON, table, and HTML outputs for automation, human readability, and easy sharing with teams.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Registry Support</h3>
+                        <p>Works with images stored locally or pulled directly from remote registries like Docker Hub, ECR, GCR, and ACR.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>CI/CD Integration</h3>
+                        <p>Designed to be easily integrated into build pipelines with minimal overhead for automated security checks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="section-light" id="technology">
+            <div class="container">
+                <h2 class="section-title">Powered By Industry-Leading Tools</h2>
+                <p class="section-subtitle">ConScan leverages well-established open-source security and compliance tools</p>
+
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h4>Trivy</h4>
+                        <p>Vulnerability scanning, secret detection, and misconfigurations</p>
+                    </div>
+
+                    <div class="tool-card">
+                        <h4>Grype</h4>
+                        <p>Deep vulnerability scanning of OS packages and dependencies</p>
+                    </div>
+
+                    <div class="tool-card">
+                        <h4>Syft</h4>
+                        <p>SBOM (Software Bill of Materials) generation</p>
+                    </div>
+
+                    <div class="tool-card">
+                        <h4>Dive</h4>
+                        <p>Discover ways to shrink Docker/OCI image size</p>
+                    </div>
+
+                    <div class="tool-card">
+                        <h4>Dockle</h4>
+                        <p>Container Image Linter for Security and CIS Benchmarks</p>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: #6b7280; margin-top: 2rem;">
+                    By orchestrating these tools behind the scenes, ConScan provides a streamlined developer experience with consistent reporting and multiple output formats.
+                </p>
+            </div>
+        </section>
+
+        <!-- Installation -->
+        <section id="installation">
+            <div class="container">
+                <h2 class="section-title">Installation</h2>
+                <p class="section-subtitle">Multiple installation options to fit your workflow</p>
+
+                <div id="binary-install" style="scroll-margin-top: 100px;">
+                    <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Binary Install</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">Get the latest version from the releases page and put it in your $PATH.</p>
+                    
+                    <div class="code-block">
+<span class="comment"># Set version</span>
+<span class="prompt">$</span> conscan_version=0.1.0-alpha1
+
+<span class="comment"># Download for macOS ARM64</span>
+<span class="prompt">$</span> wget -qO- "https://github.com/peek8/conscan/releases/download/v${conscan_version}/conscan_${conscan_version}_darwin_arm64.tar.gz" | tar -xz -C /usr/local/bin conscan
+
+<span class="comment"># Make executable</span>
+<span class="prompt">$</span> chmod +x /usr/local/bin/conscan
+                    </div>
+
+                    <p style="color: #6b7280; margin-top: 1rem;">
+                        Check your OS with <code>uname -s</code> and architecture with <code>uname -m</code> to download the correct version.
+                    </p>
+                </div>
+
+                <div id="docker-install" style="margin-top: 4rem; scroll-margin-top: 100px;">
+                    <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Docker</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">Use the ConScan container image without installing dependencies.</p>
+                    
+                    <div class="code-block">
+<span class="comment"># Basic usage</span>
+<!-- <span class="prompt">$</span> -->
+<pre>
+$ docker run --rm -it \
+--name conscan ghcr.io/peek8/conscan:latest \
+scan alpine:latest
+</pre>
+<span class="comment"># With persistent cache (recommended)</span>
+<!-- <span class="prompt">$</span>  -->
+<pre>
+$ docker run --rm -it \
+  -v ./cache:/.cache \
+  --name conscan ghcr.io/peek8/conscan:latest \
+  scan alpine:latest
+</pre>  
+                    </div>
+
+                    <p style="color: #6b7280; margin-top: 1rem;">
+                        Mounting a cache directory persists vulnerability databases between scans for faster performance.
+                    </p>
+                </div>
+
+                <div id="dependencies" style="margin-top: 4rem; scroll-margin-top: 100px;">
+                    <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Dependencies</h3>
+                    <p style="color: #6b7280; margin-bottom: 1rem;">If using the binary, you'll need to install these tools:</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
+                        <li style="padding: 0.5rem 0; color: #4b5563;">• Trivy</li>
+                        <li style="padding: 0.5rem 0; color: #4b5563;">• Grype</li>
+                        <li style="padding: 0.5rem 0; color: #4b5563;">• Syft</li>
+                        <li style="padding: 0.5rem 0; color: #4b5563;">• Dive</li>
+                        <li style="padding: 0.5rem 0; color: #4b5563;">• Dockle</li>
+                    </ul>
+
+                    <div class="code-block">
+<span class="comment"># Use the installation script</span>
+<span class="prompt">$</span> curl -sSL https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh | bash
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Guide -->
+        <section class="section-light" id="usage">
+            <div class="container">
+                <h2 class="section-title">Usage Guide</h2>
+                <p class="section-subtitle">Simple commands for comprehensive scanning</p>
+
+                <h3 style="margin: 2rem 0 1rem;">Basic Scanning</h3>
+                <div class="code-block">
+<span class="comment"># Scan a local image</span>
+<span class="prompt">$</span> conscan scan alpine-sec:1.0
+
+<span class="comment"># Scan from Docker Hub</span>
+<span class="prompt">$</span> conscan scan docker.io/yourimage:tag
+
+<span class="comment"># Scan from GitHub Container Registry</span>
+<span class="prompt">$</span> conscan scan ghcr.io/yourimage:tag
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem;">Selective Scanning</h3>
+                <p style="color: #6b7280; margin-bottom: 1rem;">By default, ConScan runs all scans. Use the <code>--scanners</code> flag to run specific checks:</p>
+                <div class="code-block">
+<span class="comment"># Scan only for vulnerabilities and secrets</span>
+<span class="prompt">$</span> conscan scan --scanners=vuln,secret yourimage:tag
+
+<span class="comment"># Available scanners: vuln, secret, package, cis, storage</span>
+                </div>
+                <div class="code-block">
+                    <pre>
+$ bin/conscan scan -h
+Scan a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and check CIS(Center for Internet Security) Benchmarks.
+
+Examples:
+# Scan a container image locally available
+$ conscan scan yourimage:tag          // uses the Podman/Docker daemon for local images
+
+# Scan container images from registry eg. dockerhub
+$ conscan scan docker.io/yourimage:tag
+
+# or from github image repo
+$ conscan scan ghcr.io/yourimage:tag
+
+# By default the scan report will be in Table format that is more convenient for the Console output. 
+# If you want the report in json format, you can use
+$ conscan scan --format json -o report.json yourimage:tag # the report will be saved to report.json
+
+# Similary to save in html format:
+$ conscan scan --format html -o report.html yourimage:tag
+
+# By default, conscan will scan everything. If you are interested for specific scan report, eg only vulnerabilities and exposed secrets you can use like:
+$ conscan scan --scanners=vuln,secret yourimage:tag
+
+Usage:
+  conscan scan [flags]
+
+Flags:
+  -f, --format string      Format of the scanning report (default "table")
+  -h, --help               help for scan
+  -o, --output string      Output File name (optional)
+      --scanners strings   Comma-separated list of what type of scans to be performed (allowed values: [vuln secret package cis storage all]).
+                           By default, Every scan is performed. Except for 'table format', "Scanning" Packages is  excluded for the sake of brevity while the report is not written to Console (default [all])   
+                    </pre>
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem;">Output Formats</h3>
+                <div class="output-formats">
+                    <div class="format-card">
+                        <h4>Table (Default)</h4>
+                        <ul>
+                            <li>Human-readable</li>
+                            <li>CLI-friendly</li>
+                            <li>Quick overview</li>
+                        </ul>
+                        <div class="code-block" style="margin-top: 1rem;">
+<span class="prompt">$</span> conscan scan yourimage:tag
+                        </div>
+                    </div>
+
+                    <div class="format-card">
+                        <h4>HTML Report</h4>
+                        <ul>
+                            <li>Shareable reports</li>
+                            <li>Visual presentation</li>
+                            <li>Team collaboration</li>
+                        </ul>
+                        <div class="code-block" style="margin-top: 1rem;">
+<span class="prompt">$</span> conscan scan --format html \
+  --output report.html yourimage:tag
+                        </div>
+                    </div>
+
+                    <div class="format-card">
+                        <h4>JSON Format</h4>
+                        <ul>
+                            <li>CI/CD integration</li>
+                            <li>Automation-ready</li>
+                            <li>Machine-parseable</li>
+                        </ul>
+                        <div class="code-block" style="margin-top: 1rem;">
+<span class="prompt">$</span> conscan scan --format json \
+  --output report.json yourimage:tag
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Technology Stack -->
+        <section class="section-light" id="private-registry">
+            <div class="container">
+                <h2 class="section-title">Scanning Private Registries</h2>
+                <p class="section-subtitle">ConScan works seamlessly with private container registries</p>
+
+                <h3 id="local-credentials">Local Registry Credentials</h3>
+                <p class="para-content">
+                    If you are in your laptop/PC and want to use the conscan at CLI, then to scan an image from private registry, you have to docker login first.
+                    When a container runtime is not present, conscan can still utilize credentials configured in common credential sources (such as ~/.docker/config.json). 
+                    It will pull images from private registries using these credentials. The common syntax of docker login command is:
+                </p>
+                <div class="code-block">
+                    <pre>
+$ docker login registry.example.com --user your-user --password superSecret
+                    </pre>
+                </div>
+                
+                <p class="para-content">
+                    If you have token, you can use that as password, eg to login dockerhub using token, you can use following command:
+                </p>
+                <div class="code-block">
+                    <pre>
+$ echo $DOCKER_TOKEN | podman login docker.io -u your-user --password-stdin
+                    </pre>
+                </div>
+
+                <p class="para-content"> 
+                    Same way for Github Registry:
+                </p>
+                <div class="code-block">
+                    <pre>
+$ echo $CR_PAT | docker login ghcr.io -u your-user --password-stdin
+                    </pre>
+                </div>
+
+                <p class="para-content"> 
+                    For AWS ECR, you have to get login password first and use that at docker login, eg
+                </p>
+                <div class="code-block">
+                    <pre>
+$ aws ecr get-login-password --region $AWS_REGION \
+  | docker login --username AWS \
+    --password-stdin 123456.dkr.ecr.$AWS_REGION.amazonaws.com
+                    </pre>
+                </div>
+
+                <blockquote>
+                <p> 
+                    Note: The above aws command will work provided that you have the proper aws configuration settings for aws cli. 
+                    One easy option is to use environment variables like:
+                </p>
+                </blockquote>
+                <div class="code-block">
+                    <pre>
+$ export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+$ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+$ export AWS_REGION=us-west-2
+                    </pre>
+                </div>
+                <p class="para-content">There are other options, see more details at Configuring settings for the AWS CLI page.</p>
+
+
+                <p class="para-content"> 
+                    For all the private registry while using conscan to scan image use the Full Image path with registry, eg:
+                </p>
+                <div class="code-block">
+                    <pre>
+$ conscan scan registry.example.com/your-image:tag
+                    </pre>
+                </div>
+
+                <h3>Registry Credentials in Container</h3>
+                <p class="para-content">
+                   If you want to use docker/podman to scan some images from private registry, the easy way would be to mount the docker config.json into container.
+                   For example, in some linux machine:     
+                </p>
+
+                <div class="code-block">
+                    <pre>
+$ docker run --rm -it \
+  -v ./cache:/.cache \
+  -v ~/.docker/config.json:/.docker/config.json  \ 
+  --name conscan  ghcr.io/peek8/conscan:latest \
+  scan registry.example.com/your-image:tag
+                    </pre>
+                </div>
+
+                <p class="para-content">
+                    At Mac, the docker config.json file might be at path ~/.config/containers/auth.json, in that case it would be: 
+                </p>
+                <div class="code-block">
+                    <pre>
+$ docker run --rm -it \
+  -v ./cache:/.cache \
+  -v ~/.config/containers/auth.json:/.docker/config.json  \ 
+  --name conscan  ghcr.io/peek8/conscan:latest \
+  scan registry.example.com/your-image:tag                        
+                    </pre>
+                </div>
+
+                <h3>Registry Credentials in Kubernetes</h3>
+                <h4>Use Simple Secret</h4>
+                <p class="para-content">
+                </p>
+
+                <h4>Use Image Pull Secret</h4>
+                <p class="para-content">
+                </p>
+
+                
+            </div>
+        </section>
+
+    </div>
+  
+  <script>
+    function toggleMenu(button) {
+      const submenu = button.nextElementSibling;
+      const isVisible = submenu.style.display === 'block';
+      submenu.style.display = isVisible ? 'none' : 'block';
+    }
+  </script>
+    
+</body>
+
+
+
+
+

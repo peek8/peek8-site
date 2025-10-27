@@ -1130,13 +1130,18 @@ spec:
         <section class="section-light" id="cli-ref">
             <div class="container">
                 <h2 class="section-title">CLI Referece</h2>
-                <!-- <p class="section-subtitle">ConScan is licensed under <a href="https://github.com/peek8/conscan/blob/main/LICENSE">Apache 2.0 license.</a></p> -->
-                 <div class="code-block">
+                <h3>Synopsis</h3>
+                <p class="para-content">
+                    Scanner for a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and CIS(Center for Internet Security) Benchmarks.
+                </p>
+                <div class="code-block">
                     <pre>
-$ bin/conscan scan -h
-Scan a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and check CIS(Center for Internet Security) Benchmarks.
-
-Examples:
+conscan scan [flags]  target 
+                    </pre>
+                </div>
+                <h3>Examples</h3>
+                <div class="code-block">
+                    <pre>
 # Scan a container image locally available
 $ conscan scan yourimage:tag          // uses the Podman/Docker daemon for local images
 
@@ -1155,18 +1160,18 @@ $ conscan scan --format html -o report.html yourimage:tag
 
 # By default, conscan will scan everything. If you are interested for specific scan report, eg only vulnerabilities and exposed secrets you can use like:
 $ conscan scan --scanners=vuln,secret yourimage:tag
-
-Usage:
-  conscan scan [flags]
-
-Flags:
+                    </pre>
+                </div>
+                <h3>Options</h3>
+                <div class="code-block">
+                    <pre>
   -f, --format string      Format of the scanning report (default "table")
   -h, --help               help for scan
   -o, --output string      Output File name (optional)
       --scanners strings   Comma-separated list of what type of scans to be performed (allowed values: [vuln secret package cis storage all]).
                            By default, Every scan is performed. Except for 'table format', "Scanning" Packages is  excluded for the sake of brevity while the report is not written to Console (default [all])   
                     </pre>
-                </div> 
+                </div>  
             </div>
         </section>
 

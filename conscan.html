@@ -563,7 +563,6 @@
                 <ul class="sidebar-submenu">
                     <li><a href="#binary-install" class="sidebar-link submenu-link">Binary Install</a></li>
                     <li><a href="#docker-install" class="sidebar-link submenu-link">Docker</a></li>
-                    <li><a href="#dependencies" class="sidebar-link submenu-link">Dependencies</a></li>
                 </ul>
             </li>
             <li><a href="#usage" class="sidebar-link">Usage Guide</a></li>
@@ -719,27 +718,27 @@
 
                 <div class="tool-grid">
                     <div class="tool-card">
-                        <h4>Trivy</h4>
+                        <h4><a href="https://github.com/aquasecurity/trivy">Trivy</a></h4>
                         <p>Vulnerability scanning, secret detection, and misconfigurations</p>
                     </div>
 
                     <div class="tool-card">
-                        <h4>Grype</h4>
+                        <h4><a href="https://github.com/anchore/grype">Grype</a></h4>
                         <p>Deep vulnerability scanning of OS packages and dependencies</p>
                     </div>
 
                     <div class="tool-card">
-                        <h4>Syft</h4>
+                        <h4><a href="https://github.com/anchore/syft">Syft</a></h4>
                         <p>SBOM (Software Bill of Materials) generation</p>
                     </div>
 
                     <div class="tool-card">
-                        <h4>Dive</h4>
+                        <h4><a href="https://github.com/wagoodman/dive">Dive</a></h4>
                         <p>Discover ways to shrink Docker/OCI image size</p>
                     </div>
 
                     <div class="tool-card">
-                        <h4>Dockle</h4>
+                        <h4><a href="https://github.com/goodwithtech/dockle">Dockle</a></h4>
                         <p>Container Image Linter for Security and CIS Benchmarks</p>
                     </div>
                 </div>
@@ -758,7 +757,27 @@
 
                 <div id="binary-install" style="scroll-margin-top: 100px;">
                     <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Binary Install</h3>
-                    <p style="color: #6b7280; margin-bottom: 1rem;">Get the latest version from the releases page and put it in your $PATH.</p>
+                    <h4>Pre-Requisites</h4>
+                    <p class="para-content">
+                        If you want to install the binary at your machine, you need to install the following tools to make the binary work:
+                        <br>
+                        • <a href="https://github.com/aquasecurity/trivy">Trivy</a>  • <a href="https://github.com/anchore/grype">Grype</a>
+                        • <a href="https://github.com/anchore/syft">Syft</a>
+                        <br>
+                         • <a href="https://github.com/wagoodman/dive">Dive</a> • <a href="https://github.com/goodwithtech/dockle">Dockle</a>
+                    </p>
+                    <p class="para-content">
+                        You can go to the corresponding sites and install them as per the installation guide, or can use <a href="https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh">install-dependencies.sh</a> script:
+                    </p>
+                    <div class="code-block">
+                        <pre>
+$ curl -sSL https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh | bash                            
+                        </pre>
+                    </div>
+                    <h4>Binary</h4>
+                    <p class="para-content">
+                        Get the latest version from the releases page and put it in your $PATH.
+                    </p>
                     
                     <div class="code-block">
 <span class="comment"># Set version</span>
@@ -801,24 +820,6 @@ $ docker run --rm -it \
                     <p style="color: #6b7280; margin-top: 1rem;">
                         Mounting a cache directory persists vulnerability databases between scans for faster performance.
                     </p>
-                </div>
-
-                <div id="dependencies" style="margin-top: 4rem; scroll-margin-top: 100px;">
-                    <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Dependencies</h3>
-                    <p style="color: #6b7280; margin-bottom: 1rem;">If using the binary, you'll need to install these tools:</p>
-                    
-                    <ul style="list-style: none; padding: 0; margin: 1.5rem 0;">
-                        <li style="padding: 0.5rem 0; color: #4b5563;">• Trivy</li>
-                        <li style="padding: 0.5rem 0; color: #4b5563;">• Grype</li>
-                        <li style="padding: 0.5rem 0; color: #4b5563;">• Syft</li>
-                        <li style="padding: 0.5rem 0; color: #4b5563;">• Dive</li>
-                        <li style="padding: 0.5rem 0; color: #4b5563;">• Dockle</li>
-                    </ul>
-
-                    <div class="code-block">
-<span class="comment"># Use the installation script</span>
-<span class="prompt">$</span> curl -sSL https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh | bash
-                    </div>
                 </div>
             </div>
         </section>
@@ -871,8 +872,7 @@ $ docker run --rm -it \
                             <li>Team collaboration</li>
                         </ul>
                         <div class="code-block" style="margin-top: 1rem;">
-<span class="prompt">$</span> conscan scan --format html \
-  --output report.html yourimage:tag
+<span class="prompt">$</span> conscan scan --format html --output report.html yourimage:tag
                         </div>
                     </div>
 
@@ -884,8 +884,8 @@ $ docker run --rm -it \
                             <li>Machine-parseable</li>
                         </ul>
                         <div class="code-block" style="margin-top: 1rem;">
-<span class="prompt">$</span> conscan scan --format json \
-  --output report.json yourimage:tag
+<span class="prompt">$</span> conscan scan --format json 
+--output report.json yourimage:tag
                         </div>
                     </div>
                 </div>

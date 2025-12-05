@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Peek8 - Cloud Infrastructure & DevOps Excellence</title>
+    <script src="/js/index.js" is:inline></script>
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- <div class="logo">peek8</div> -->
+        <img src="./logo.png" width="100px">
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#services" onclick="showPage('services')">Services</a></li>
+            <li class="dropdown">
+                <span class="dropdown-toggle">Product ▾</span>
+                <ul class="dropdown-menu">
+                    <!-- <li><a href="conscan.html" onclick="showPage('conscan')">ConScan</a></li> -->
+                    <li><a href="conscan">ConScan</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="showPage('about')">About Us</a></li>
+            <li><a href="#contact" onclick="showPage('home'); setTimeout(() => document.getElementById('contact').scrollIntoView({behavior: 'smooth'}), 100)">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="container">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Cloud Infrastructure & DevOps Excellence</h1>
+                    <p>Transform your infrastructure with cutting-edge multi-cloud solutions, security automation, and comprehensive DevOps services. Build faster, deploy smarter, scale effortlessly.</p>
+                    <div class="cta-buttons">
+                        <a href="#" onclick="showPage('about')" class="btn btn-primary">Learn More</a>
+                        <a href="conscan.html" class="btn btn-secondary">Explore ConScan</a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">End-to-end cloud and DevOps solutions designed to accelerate your digital transformation</p>
+                
+                <div class="services-grid">
+                    <div class="service-card" onclick="showServiceDetail('multicloud')">
+                        <div class="service-icon">☁️</div>
+                        <h3>Multi-Cloud Architecture</h3>
+                        <p>Design and deploy scalable, resilient infrastructure across AWS, Azure, and GCP. Optimize costs and performance with expert cloud architecture.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('observability')">
+                        <div class="service-icon">📊</div>
+                        <h3>Observability & Monitoring</h3>
+                        <p>Comprehensive logging, monitoring, and alerting solutions. Gain deep insights into your systems with advanced observability platforms.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('security')">
+                        <div class="service-icon">🔒</div>
+                        <h3>Security & Compliance</h3>
+                        <p>Automate security controls and compliance checks. Implement zero-trust architecture and maintain continuous compliance across your infrastructure.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('devops')">
+                        <div class="service-icon">⚡</div>
+                        <h3>DevOps Transformation</h3>
+                        <p>Streamline your development pipeline with CI/CD automation, infrastructure as code, and modern DevOps practices for faster delivery.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('development')">
+                        <div class="service-icon">💻</div>
+                        <h3>Full-Stack Development</h3>
+                        <p>Custom software development for web and mobile. From responsive frontends to scalable backend services, we build it all.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('automation')">
+                        <div class="service-icon">🤖</div>
+                        <h3>Process Automation</h3>
+                        <p>Automate repetitive business processes and workflows. Reduce manual effort and errors while increasing operational efficiency.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="product-section">
+                <div class="product-showcase">
+                    <div class="product-info">
+                        <span class="product-badge">FEATURED PRODUCT</span>
+                        <h2>ConScan</h2>
+                        <p style="color: #6b7280; margin-bottom: 2rem;">Comprehensive container security scanning that goes beyond basic vulnerability detection. Protect your containerized applications with enterprise-grade security analysis.</p>
+                        
+                        <ul class="features-list">
+                            <li>Vulnerability scanning for known CVEs</li>
+                            <li>Exposed secrets & credential detection</li>
+                            <li>Inefficient file storage analysis</li>
+                            <li>Complete SBOM generation</li>
+                            <li>OS package inventory</li>
+                            <li>CIS Benchmark compliance checks</li>
+                        </ul>
+
+                        <a href="#" onclick="showPage('conscan')" class="btn btn-primary">Learn More</a>
+                    </div>
+
+                    <div class="product-visual">
+                        <img src="table-report.gif" width="100%"/>
+                        <!-- <div class="terminal">
+                            
+                            <div class="terminal-header">
+                                <span class="terminal-dot dot-red"></span>
+                                <span class="terminal-dot dot-yellow"></span>
+                                <span class="terminal-dot dot-green"></span>
+                            </div>
+                            <div class="terminal-content">
+                                <div><span class="prompt">$</span> conscan analyze myapp:latest</div>
+                                <div><span class="success">✓</span> Image pulled successfully</div>
+                                <div><span class="success">✓</span> Scanning for vulnerabilities...</div>
+                                <div><span class="success">✓</span> Analyzing dependencies (SBOM)...</div>
+                                <div><span class="success">✓</span> Checking for exposed secrets...</div>
+                                <div><span class="success">✓</span> Running CIS benchmarks...</div>
+                                <div style="margin-top: 1rem;">
+                                    <div>Results:</div>
+                                    <div style="color: #10b981;">  ✓ 0 Critical vulnerabilities</div>
+                                    <div style="color: #f59e0b;">  ⚠ 2 Medium vulnerabilities</div>
+                                    <div style="color: #10b981;">  ✓ No exposed secrets</div>
+                                    <div style="color: #10b981;">  ✓ CIS compliance: 98%</div>
+                                </div>
+                            </div> 
+                        </div> -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2 class="section-title">Ready to Transform Your Infrastructure?</h2>
+                <p class="section-subtitle">Let's discuss how peek8 can accelerate your cloud journey and secure your containerized applications</p>
+                <div style="text-align: center;">
+                    <a href="mailto:contact@peek8.com" class="btn btn-primary">Get in Touch</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <div class="container">
+            <section>
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive cloud and DevOps solutions tailored to your business needs</p>
+                
+                <div class="services-grid">
+                    <div class="service-card" onclick="showServiceDetail('multicloud')">
+                        <div class="service-icon">☁️</div>
+                        <h3>Multi-Cloud Architecture</h3>
+                        <p>Design and deploy scalable, resilient infrastructure across AWS, Azure, and GCP. Click to learn more.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('observability')">
+                        <div class="service-icon">📊</div>
+                        <h3>Observability & Monitoring</h3>
+                        <p>Comprehensive logging, monitoring, and alerting solutions. Click to learn more.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('security')">
+                        <div class="service-icon">🔒</div>
+                        <h3>Security & Compliance</h3>
+                        <p>Automate security controls and compliance checks. Click to learn more.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('devops')">
+                        <div class="service-icon">⚡</div>
+                        <h3>DevOps Transformation</h3>
+                        <p>Streamline your development pipeline with modern DevOps practices. Click to learn more.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('development')">
+                        <div class="service-icon">💻</div>
+                        <h3>Full-Stack Development</h3>
+                        <p>Custom software development for web and mobile. Click to learn more.</p>
+                    </div>
+
+                    <div class="service-card" onclick="showServiceDetail('automation')">
+                        <div class="service-icon">🤖</div>
+                        <h3>Process Automation</h3>
+                        <p>Automate repetitive business processes and workflows. Click to learn more.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Service Detail Page -->
+    <div id="service-detail" class="page">
+        <div class="container">
+            <section>
+                <a href="#" onclick="showPage('services')" class="back-button">← Back to Services</a>
+                <div class="service-detail" id="service-detail-content"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <section>
+                <h2 class="section-title">About Peek8</h2>
+                <p class="section-subtitle">Pioneering cloud infrastructure and DevOps solutions since our inception</p>
+                
+                <div class="about-content">
+                    <div class="about-section">
+                        <h3>Who We Are</h3>
+                        <p>Peek8 is a leading provider of cloud infrastructure and DevOps solutions, dedicated to helping organizations modernize their technology stack and accelerate digital transformation. Our team of expert engineers and architects brings decades of combined experience in cloud computing, security, and software development.</p>
+                        <p>We believe in building long-term partnerships with our clients, understanding their unique challenges, and delivering tailored solutions that drive real business value.</p>
+                    </div>
+
+                    <!-- <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Enterprise Clients</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime Guarantee</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support Available</div>
+                        </div>
+                    </div> -->
+
+                    <div class="about-section">
+                        <h3>Our Mission</h3>
+                        <p>To empower organizations with robust, secure, and scalable cloud infrastructure that enables innovation and growth. We strive to be the trusted partner that transforms complex technical challenges into competitive advantages.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Why Choose Peek8</h3>
+                        <p>Our expertise spans the entire cloud and DevOps ecosystem. From multi-cloud architecture to container security, we provide end-to-end solutions that ensure your infrastructure is reliable, secure, and optimized for performance.</p>
+                        <p>We don't just implement technology—we build lasting relationships, provide ongoing support, and continuously optimize your systems to meet evolving business needs.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ConScan Detail Page -->
+    <div id="conscan" class="page">
+        <div class="container">
+            <section>
+                <a href="#" onclick="showPage('home')" class="back-button">← Back to Home</a>
+                <div class="conscan-detail">
+                    <h2 class="section-title">ConScan</h2>
+                    <p class="section-subtitle">Enterprise-grade container security scanning for modern DevOps teams</p>
+
+                    <div style="max-width: 900px; margin: 0 auto 3rem;">
+                        <p style="color: #6b7280; line-height: 1.8; font-size: 1.125rem;">
+                            ConScan is our flagship container security solution designed to protect your containerized applications throughout the entire development lifecycle. With comprehensive scanning capabilities and actionable insights, ConScan helps you identify and remediate security issues before they reach production.
+                        </p>
+                    </div>
+
+                    <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #1a1a1a;">Key Features</h3>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-detail-card">
+                            <h3>🔍 Vulnerability Scanning</h3>
+                            <p>Comprehensive detection of known CVEs across all layers of your container images. Stay ahead of security threats with real-time vulnerability intelligence from multiple trusted databases.</p>
+                        </div>
+
+                        <div class="feature-detail-card">
+                            <h3>🔐 Secret Detection</h3>
+                            <p>Identify exposed credentials, API keys, tokens, and sensitive configuration data that could compromise your application security. Prevent credential leaks before deployment.</p>
+                        </div>
+
+                        <div class="feature-detail-card">
+                            <h3>💾 Storage Optimization</h3>
+                            <p>Analyze and identify inefficient file storage patterns, unnecessary dependencies, and bloated layers that increase image size and attack surface.</p>
+                        </div>
+
+                        <div class="feature-detail-card">
+                            <h3>📦 SBOM Generation</h3>
+                            <p>Generate complete Software Bill of Materials (SBOM) for full transparency into all software components, libraries, and dependencies in your container images.</p>
+                        </div>
+
+                        <div class="feature-detail-card">
+                            <h3>📋 Package Inventory</h3>
+                            <p>Maintain detailed inventory of all OS packages and application dependencies, enabling better license compliance and dependency management.</p>
+                        </div>
+
+                        <div class="feature-detail-card">
+                            <h3>✅ CIS Benchmarks</h3>
+                            <p>Automated compliance checks against CIS Docker Benchmarks and Kubernetes security best practices. Ensure your containers meet industry security standards.</p>
+                        </div>
+                    </div>
+
+                    <div style="max-width: 900px; margin: 4rem auto 0;">
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">How It Works</h3>
+                        
+                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
+                            <ol style="list-style-position: inside; color: #4b5563; line-height: 2; font-size: 1.125rem;">
+                                <li style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">Pull Container Image:</strong> ConScan retrieves your container image from any registry (Docker Hub, ECR, GCR, ACR).</li>
+                                <li style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">Deep Analysis:</strong> Multiple scanning engines analyze layers, packages, files, and configurations simultaneously.</li>
+                                <li style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">Generate Reports:</strong> Receive detailed reports with severity ratings, remediation guidance, and compliance status.</li>
+                                <li><strong style="color: #1a1a1a;">Integrate & Automate:</strong> Seamlessly integrate into CI/CD pipelines to automate security checks before deployment.</li>
+                            </ol>
+                        </div>
+
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a1a1a;">Use Cases</h3>
+                        <div style="color: #6b7280; line-height: 1.8; font-size: 1.125rem; margin-bottom: 1rem;">
+                            <p style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">DevOps Teams:</strong> Shift security left by scanning images during development and preventing vulnerable containers from reaching production.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">Security Teams:</strong> Maintain continuous visibility into container security posture across all environments and enforce security policies.</p>
+                            <p style="margin-bottom: 1rem;"><strong style="color: #1a1a1a;">Compliance Officers:</strong> Ensure adherence to industry standards and regulatory requirements with automated compliance reporting.</p>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 3rem;">
+                            <a href="mailto:contact@peek8.com?subject=ConScan Demo Request" class="btn btn-primary">Request a Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <!-- <div class="logo">peek8</div> -->
+                <img src="./logo.png" width="100px">
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('services')">Services</a></li>
+                    <li><a href="#" onclick="showPage('conscan')">ConScan</a></li>
+                    <li><a href="#" onclick="showPage('about')">About</a></li>
+                </ul>
+                <p style="color: #6b7280;">&copy; 2025 peek8. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+    </script>
+</body>
+</html>

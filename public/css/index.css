@@ -379,6 +379,16 @@ section:nth-child(odd) {
     margin-bottom: 3rem;
 }
 
+.about-section-home {
+    margin-bottom: 5px;
+}
+.about-section-home p {
+    color: #6b7280;
+    line-height: 1.8;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
 .about-section h3 {
     font-size: 1.75rem;
     margin-bottom: 1rem;

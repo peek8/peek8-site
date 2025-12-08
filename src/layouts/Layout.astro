@@ -2,21 +2,64 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="favicon.png" />
+		<title>Peek8 - Cloud Infrastructure & DevOps Excellence</title>
+		<script src="/js/index.js" is:inline></script>
+		<link rel="stylesheet" href="/css/index.css" />
 	</head>
 	<body>
-		<slot />
+		<nav>
+			<!-- <div class="logo">peek8</div> -->
+			<img src="./logo.png" width="100px" />
+			<ul class="nav-links">
+				<li><a href="/">Home</a></li>
+				<li>
+					<a href="/#services">Services</a>
+				</li>
+				<li class="dropdown">
+					<span class="dropdown-toggle">Product ▾</span>
+					<ul class="dropdown-menu">
+						<!-- <li><a href="conscan.html" onclick="showPage('conscan')">ConScan</a></li> -->
+						<li><a href="conscan">ConScan</a></li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="showPage('about')">About Us</a></li>
+				<li>
+					<a href="/#contact">Contact</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div id="home" class="page active">
+			<div class="container">
+				<slot />
+			</div>
+		</div>
+
+		<footer>
+			<div class="container">
+				<div class="footer-content">
+					<!-- <div class="logo">peek8</div> -->
+					<img src="./logo.png" width="100px" />
+					<ul class="footer-links">
+						<li><a href="#" onclick="showPage('home')">Home</a></li>
+						<li>
+							<a href="/#services">Services</a>
+						</li>
+						<li>
+							<a href="#" onclick="showPage('conscan')"
+								>ConScan</a>
+						</li>
+						<li>
+							<a href="#" onclick="showPage('about')">About</a>
+						</li>
+					</ul>
+					<p style="color: #6b7280;">
+						&copy; 2025 peek8. All rights reserved.
+					</p>
+				</div>
+			</div>
+		</footer>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

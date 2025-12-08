@@ -113,7 +113,7 @@ nav {
 }
 
 .page {
-    display: none;
+    /* display: none; */
     min-height: 100vh;
     padding-top: 100px;
 }
@@ -262,6 +262,7 @@ section:nth-child(odd) {
 .service-card p {
     color: #6b7280;
     line-height: 1.7;
+    padding-bottom: 30px;
 }
 
 .product-showcase {
@@ -487,6 +488,24 @@ section:nth-child(odd) {
     font-size: 1.125rem;
     margin-bottom: 1rem;
 }
+
+.service-detail-page {
+    padding-top: 50px;
+}
+
+.service-detail-title{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.service-detail-hero {
+    font-size: 3.5em;
+    text-align: center;
+    padding: 50px 0;
+
+}
+
 
 .service-detail-section ul {
     list-style: none;

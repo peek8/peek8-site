@@ -1,0 +1,45 @@
+---
+import { serviceDetails } from "../content/services";
+---
+
+<div id="service-detail" class="service-detail-page">
+    <div class="container">
+        <section>
+            <div class="service-detail" id="service-detail-content">
+                <h1 class="service-detail-hero">Our Services</h1>
+                {
+                    serviceDetails.map((svc) => (
+                        <section id={svc.id}>
+                            <div class="service-detail-title">
+                                <div
+                                    class="service-icon"
+                                    style="margin-bottom: 2rem; font-size: 3rem;"
+                                >
+                                    {svc.icon}
+                                </div>
+                                <h2>{svc.title}</h2>
+                            </div>
+                            <p style="color: #6b7280; line-height: 1.8; font-size: 1.125rem; margin-bottom: 3rem;">
+                                {svc.description}
+                            </p>
+
+                            {svc.sections.map((sec) => (
+                                <div class="service-detail-section">
+                                    <h3>{sec.title}</h3>
+                                    {sec.content && <p>{sec.content}</p>}
+                                    {sec.list && (
+                                        <ul>
+                                            {sec.list.map((item) => (
+                                                <li>{item}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            ))}
+                        </section>
+                    ))
+                }
+            </div>
+        </section>
+    </div>
+</div>

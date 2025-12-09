@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/png" href="favicon.png"><link rel="stylesheet" href="/css/product.css"><title>ConScan - Container Security Scanner | Peek8</title></head> <body> <nav> <!-- <a href="index.html" class="logo">peek8</a> --> <a href="/"><img src="/logo.png" width="100px"></a> <ul class="nav-links"> <li><a href="/">Home</a></li> <li><a href="index.html#services">Services</a></li> <li class="dropdown"> <span class="dropdown-toggle">Product ▾</span> <ul class="dropdown-menu"> <li><a href="#">ConScan</a></li> </ul> </li> <li><a href="index.html#about">About</a></li> <li><a href="mailto:contact@peek8.com">Contact</a></li> </ul> </nav> <button class="mobile-menu-toggle" onclick="toggleSidebar()">☰ Menu</button> <!-- Sidebar --> <aside class="sidebar" id="sidebar"> <ul class="sidebar-menu"> <li><a href="#overview" class="sidebar-link">Overview</a></li> <li><a href="#why-conscan" class="sidebar-link">Why ConScan?</a></li> <li><a href="#features" class="sidebar-link">Key Features</a></li> <li><a href="#technology" class="sidebar-link">Technology Stack</a></li> <li><a href="#installation" class="sidebar-link" onclick="toggleMenu(this)">Getting Started ▾</a> <ul class="sidebar-submenu"> <li><a href="#binary-install" class="sidebar-link submenu-link">Binary Install</a></li> <li><a href="#docker-install" class="sidebar-link submenu-link">Docker</a></li> </ul> </li> <li><a href="#usage" class="sidebar-link">Usage Guide</a></li> <li><a href="#private-registry" class="sidebar-link" onclick="toggleMenu(this)">Private Registries ▾</a> <ul class="sidebar-submenu"> <li><a href="#local-credentials" class="sidebar-link submenu-link">Local Registry Credentials</a></li> <li><a href="#container-credentials" class="sidebar-link submenu-link">Registry Credentials in Container</a></li> <li><a href="#kube-credentials" class="sidebar-link submenu-link">Registry Credentials in Kubernetes</a></li> </ul> </li> <li><a href="#cicd" class="sidebar-link" onclick="toggleMenu(this)">CI/CD Integration ▾</a> <ul class="sidebar-submenu"> <li><a href="#github-action" class="sidebar-link submenu-link">Integration With Github Action</a></li> </ul> </li> <li><a href="#cli-ref" class="sidebar-link">CLI Reference</a></li> <li><a href="#license" class="sidebar-link">License</a></li> </ul> </aside> <!-- Main Content --> <div class="main-content"> <!-- Hero Section --> <section class="hero" id="overview"> <div class="container"> <h1> <img src="conscan-logo.png" alt="conscan" style="width:40px; vertical-align:middle;">
+ConScan
+</h1> <p class="tagline">Secure, lean, and compliant containers made simple</p> <p>A lightweight yet powerful container image scanning tool that helps you secure and optimize your container workloads. Analyze container images for security risks, misconfigurations, and inefficiencies before deploying to production.</p> <div class="cta-buttons"> <a href="https://github.com/peek8/conscan" class="btn btn-primary" target="_blank">View on GitHub</a> <a href="#installation" class="btn btn-secondary">Get Started</a> </div> </div> </section> <!-- What is ConScan --> <section> <div class="container"> <h2 class="section-title">What is ConScan?</h2> <p class="section-subtitle">ConScan is a comprehensive container security scanner that provides actionable insights to keep your containers secure, lean, and compliant.</p> <p class="para-content">
+With ConScan, you can detect vulnerabilities in OS packages and application dependencies, identify exposed secrets inside images, generate SBOM (Software Bill of Materials) for transparency and compliance, spot inefficient file storage that bloats images, validate container security against CIS Benchmarks, and export results in JSON, table, or HTML formats for easy integration and reporting.
+</p> <p style="color: #4b5563; font-size: 1.125rem; line-height: 1.8;">
+By integrating ConScan into your CI/CD pipeline, you can shift security left and ensure your containers are secure, lean, and compliant from the very beginning.
+</p> </div> </section> <!-- Why ConScan --> <section class="section-light" id="why-conscan"> <div class="container"> <h2 class="section-title">Why ConScan?</h2> <div class="why-conscan"> <div class="why-item"> <h3>🔀 Unified Workflow</h3> <p>No more juggling multiple tools. ConScan provides a single interface to multiple best-in-class scanners, eliminating fragmented workflows.</p> </div> <div class="why-item"> <h3>📑 Consistent Reporting</h3> <p>Output formats and structures are normalized across all scans, making it easier to integrate results into CI/CD pipelines or share with teams.</p> </div> <div class="why-item"> <h3>🖥 Developer-First Experience</h3> <p>Simplified setup and intuitive CLI that reduces the learning curve for new users. No need to remember multiple command flags or combine results from different scanners.</p> </div> <div class="why-item"> <h3>📦 One-Stop Scanning</h3> <p>Run a single command against an image and get everything — vulnerabilities, SBOM, secrets, CIS checks, and efficiency hints.</p> </div> </div> <p style="text-align: center; font-size: 1.25rem; color: #1a1a1a; font-weight: 600; margin-top: 2rem;">
+👉 ConScan doesn't try to reinvent the wheel — it puts the best wheels together on one car. 🚗💨
+</p> </div> </section> <!-- Key Features --> <section id="features"> <div class="container"> <h2 class="section-title">Key Features</h2> <p class="section-subtitle">Comprehensive security scanning powered by industry-leading tools</p> <div class="features-grid"> <div class="feature-card"> <div class="feature-icon">🔍</div> <h3>Vulnerability Scanning</h3> <p>Scans OS packages and software dependencies against known vulnerabilities using multiple databases for comprehensive coverage.</p> </div> <div class="feature-card"> <div class="feature-icon">🔐</div> <h3>Secret Detection</h3> <p>Detects API keys, tokens, and other sensitive information accidentally embedded in images to prevent credential leaks.</p> </div> <div class="feature-card"> <div class="feature-icon">📋</div> <h3>SBOM Generation</h3> <p>Produces a detailed Software Bill of Materials (SBOM) for complete visibility into all components in use.</p> </div> <div class="feature-card"> <div class="feature-icon">💾</div> <h3>Storage Analysis</h3> <p>Highlights large or unnecessary files that increase image size, helping you create leaner container images.</p> </div> <div class="feature-card"> <div class="feature-icon">✅</div> <h3>CIS Benchmarks</h3> <p>Validates images against Center for Internet Security (CIS) recommendations to ensure best practices.</p> </div> <div class="feature-card"> <div class="feature-icon">📊</div> <h3>Multiple Output Formats</h3> <p>Supports JSON, table, and HTML outputs for automation, human readability, and easy sharing with teams.</p> </div> <div class="feature-card"> <div class="feature-icon">🌐</div> <h3>Registry Support</h3> <p>Works with images stored locally or pulled directly from remote registries like Docker Hub, ECR, GCR, and ACR.</p> </div> <div class="feature-card"> <div class="feature-icon">⚡</div> <h3>CI/CD Integration</h3> <p>Designed to be easily integrated into build pipelines with minimal overhead for automated security checks.</p> </div> </div> </div> </section> <!-- Technology Stack --> <section class="section-light" id="technology"> <div class="container"> <h2 class="section-title">Powered By Industry-Leading Tools</h2> <p class="section-subtitle">ConScan leverages well-established open-source security and compliance tools</p> <div class="tool-grid"> <div class="tool-card"> <h4><a href="https://github.com/aquasecurity/trivy">Trivy</a></h4> <p>Vulnerability scanning, secret detection, and misconfigurations</p> </div> <div class="tool-card"> <h4><a href="https://github.com/anchore/grype">Grype</a></h4> <p>Deep vulnerability scanning of OS packages and dependencies</p> </div> <div class="tool-card"> <h4><a href="https://github.com/anchore/syft">Syft</a></h4> <p>SBOM (Software Bill of Materials) generation</p> </div> <div class="tool-card"> <h4><a href="https://github.com/wagoodman/dive">Dive</a></h4> <p>Discover ways to shrink Docker/OCI image size</p> </div> <div class="tool-card"> <h4><a href="https://github.com/goodwithtech/dockle">Dockle</a></h4> <p>Container Image Linter for Security and CIS Benchmarks</p> </div> </div> <p style="text-align: center; color: #6b7280; margin-top: 2rem;">
+By orchestrating these tools behind the scenes, ConScan provides a streamlined developer experience with consistent reporting and multiple output formats.
+</p> </div> </section> <!-- Installation --> <section id="installation"> <div class="container"> <h2 class="section-title">Getting Started</h2> <p class="section-subtitle">Multiple installation options to fit your workflow</p> <div id="binary-install" style="scroll-margin-top: 100px;"> <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Binary Install</h3> <h4>Pre-Requisites</h4> <p class="para-content">
+If you want to install the binary at your machine, you need to install the following tools to make the binary work:
+<br>
+• <a href="https://github.com/aquasecurity/trivy">Trivy</a> • <a href="https://github.com/anchore/grype">Grype</a>
+• <a href="https://github.com/anchore/syft">Syft</a> <br>
+• <a href="https://github.com/wagoodman/dive">Dive</a> • <a href="https://github.com/goodwithtech/dockle">Dockle</a> </p> <p class="para-content">
+You can go to the corresponding sites and install them as per the installation guide, or can use <a href="https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh">install-dependencies.sh</a> script:
+</p> <div class="code-block"> <pre>$ curl -sSL https://raw.githubusercontent.com/peek8/conscan/main/scripts/install-dependencies.sh | bash                            
+                        </pre> </div> <h4>Binary</h4> <p class="para-content">
+Get the latest version from the releases page and put it in your $PATH.
+</p> <div class="code-block"> <span class="comment"># Set version</span> <span class="prompt">$</span> conscan_version=0.1.0-alpha1
+<span class="comment"># Download for macOS ARM64</span> <span class="prompt">$</span> <span>wget -qO- &quot;https://github.com/peek8/conscan/releases/download/v${conscan_version}/conscan_${conscan_version}_darwin_arm64.tar.gz&quot; | tar -xz -C /usr/local/bin conscan</span> <span class="comment"># Make executable</span> <span class="prompt">$</span> chmod +x /usr/local/bin/conscan
+</div> <p style="color: #6b7280; margin-top: 1rem;">
+Check your OS with <code>uname -s</code> and architecture with <code>uname -m</code> to download the correct version.
+</p> </div> <div id="docker-install" style="margin-top: 4rem; scroll-margin-top: 100px;"> <h3 style="margin-bottom: 1rem; font-size: 2rem; color: #1a1a1a;">Docker</h3> <p style="color: #6b7280; margin-bottom: 1rem;">Use the ConScan container image without installing dependencies.</p> <div class="code-block"> <span class="comment"># Basic usage</span> <!-- <span class="prompt">$</span> --> <pre>$ docker run --rm -it \
+--name conscan ghcr.io/peek8/conscan:latest \
+scan alpine:latest
+</pre> <span class="comment"># With persistent cache (recommended)</span> <!-- <span class="prompt">$</span>  --> <pre>$ docker run --rm -it \
+  -v ./cache:/.cache \
+  --name conscan ghcr.io/peek8/conscan:latest \
+  scan alpine:latest
+</pre> </div> <p style="color: #6b7280; margin-top: 1rem;">
+Mounting a cache directory persists vulnerability databases between scans for faster performance.
+</p> </div> </div> </section> <!-- Usage Guide --> <section class="section-light" id="usage"> <div class="container"> <h2 class="section-title">Usage Guide</h2> <p class="section-subtitle">Simple commands for comprehensive scanning</p> <h3 style="margin: 2rem 0 1rem;">Basic Scanning</h3> <div class="code-block"> <span class="comment"># Scan a local image</span> <span class="prompt">$</span> conscan scan alpine-sec:1.0
+<span class="comment"># Scan from Docker Hub</span> <span class="prompt">$</span> conscan scan docker.io/yourimage:tag
+<span class="comment"># Scan from GitHub Container Registry</span> <span class="prompt">$</span> conscan scan ghcr.io/yourimage:tag
+</div> <h3 style="margin: 2rem 0 1rem;">Selective Scanning</h3> <p style="color: #6b7280; margin-bottom: 1rem;">By default, ConScan runs all scans. Use the <code>--scanners</code> flag to run specific checks:</p> <div class="code-block"> <span class="comment"># Scan only for vulnerabilities and secrets</span> <span class="prompt">$</span> conscan scan --scanners=vuln,secret yourimage:tag
+<span class="comment"># Available scanners: vuln, secret, package, cis, storage</span> </div> <h3 style="margin: 2rem 0 1rem;">Output Formats</h3> <div class="output-formats"> <div class="format-card"> <h4>Table (Default)</h4> <ul> <li>Human-readable</li> <li>CLI-friendly</li> <li>Quick overview</li> </ul> <div class="code-block" style="margin-top: 1rem;"> <span class="prompt">$</span> conscan scan yourimage:tag
+</div> </div> <div class="format-card"> <h4>HTML Report</h4> <ul> <li>Shareable reports</li> <li>Visual presentation</li> <li>Team collaboration</li> </ul> <div class="code-block" style="margin-top: 1rem;"> <span class="prompt">$</span> conscan scan --format html --output report.html yourimage:tag
+</div> </div> <div class="format-card"> <h4>JSON Format</h4> <ul> <li>CI/CD integration</li> <li>Automation-ready</li> <li>Machine-parseable</li> </ul> <div class="code-block" style="margin-top: 1rem;"> <span class="prompt">$</span> conscan scan --format json 
+--output report.json yourimage:tag
+</div> </div> </div> </div> </section> <!-- Private Registry --> <section class="section-light" id="private-registry"> <div class="container"> <h2 class="section-title">Scanning Private Registries</h2> <p class="section-subtitle">ConScan works seamlessly with private container registries</p> <h3 id="local-credentials">Local Registry Credentials</h3> <p class="para-content">
+If you are in your laptop/PC and want to use the conscan at CLI, then to scan an image from private registry, you have to docker login first.
+                    When a container runtime is not present, conscan can still utilize credentials configured in common credential sources (such as ~/.docker/config.json). 
+                    It will pull images from private registries using these credentials. The common syntax of docker login command is:
+</p> <div class="code-block"> <pre>$ docker login registry.example.com --user your-user --password superSecret
+                    </pre> </div> <p class="para-content">
+If you have token, you can use that as password, eg to login dockerhub using token, you can use following command:
+</p> <div class="code-block"> <pre>$ echo $DOCKER_TOKEN | podman login docker.io -u your-user --password-stdin
+                    </pre> </div> <p class="para-content">
+Same way for Github Registry:
+</p> <div class="code-block"> <pre>$ echo $CR_PAT | docker login ghcr.io -u your-user --password-stdin
+                    </pre> </div> <p class="para-content">
+For AWS ECR, you have to get login password first and use that at docker login, eg
+</p> <div class="code-block"> <pre>$ aws ecr get-login-password --region $AWS_REGION \
+  | docker login --username AWS \
+    --password-stdin 123456.dkr.ecr.$AWS_REGION.amazonaws.com
+                    </pre> </div> <blockquote> <p>
+Note: The above aws command will work provided that you have the proper aws configuration settings for aws cli. 
+                    One easy option is to use environment variables like:
+</p> </blockquote> <div class="code-block"> <pre>$ export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+$ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+$ export AWS_REGION=us-west-2
+                    </pre> </div> <p class="para-content">There are other options, see more details at Configuring settings for the AWS CLI page.</p> <p class="para-content">
+For all the private registry while using conscan to scan image use the Full Image path with registry, eg:
+</p> <div class="code-block"> <pre>$ conscan scan registry.example.com/your-image:tag
+                    </pre> </div> <h3 id="container-credentials">Registry Credentials in Container</h3> <p class="para-content">
+If you want to use docker/podman to scan some images from private registry, the easy way would be to mount the docker config.json into container.
+                   For example, in some linux machine:
+</p> <div class="code-block"> <pre>$ docker run --rm -it \
+  -v ./cache:/.cache \
+  -v ~/.docker/config.json:/.docker/config.json  \ 
+  --name conscan  ghcr.io/peek8/conscan:latest \
+  scan registry.example.com/your-image:tag
+                    </pre> </div> <p class="para-content">
+At Mac, the docker config.json file might be at path ~/.config/containers/auth.json, in that case it would be:
+</p> <div class="code-block"> <pre>$ docker run --rm -it \
+  -v ./cache:/.cache \
+  -v ~/.config/containers/auth.json:/.docker/config.json  \ 
+  --name conscan  ghcr.io/peek8/conscan:latest \
+  scan registry.example.com/your-image:tag                        
+                    </pre> </div> <h3 id="kube-credentials">Registry Credentials in Kubernetes</h3> <h4>Use Simple Secret</h4> <p class="para-content">
+You can create a Secret using the above mentioned ~/.docker/config.json. And mount that secret in the conscan container.
+</p> <p>Create secret secret.yaml using <i class="code">config.json:</i></p> <div class="code-block"> <pre>apiVersion: v1
+kind: Secret
+metadata:
+    name: registry-config
+    namespace: awesomeapp
+data:
+    config.json: (base64 encoded config.json)                      
+                    </pre> </div> <p>Apply it:</p> <div class="code-block"> <pre>$ kubectl apply -f secret.yaml
+                    </pre> </div> <p>Create your pod running conscan. The config.json file needs to be mounted at /.docker/config.json. here's pod.yaml:</p> <div class="code-block"> <pre>$ kubectl apply -f secret.yaml
+                    </pre> </div> <p>Apply pod.yaml</p> <div class="code-block"> <pre>$ kubectl apply -f pod.yaml
+                    </pre> </div> <blockquote>
+Note: At args section of pod, you can add --format to get different formats than table eg. --format json for json format. And to save it to a file use --output.
+</blockquote> <h4>Use Image Pull Secret</h4> <p class="para-content">
+You can also create secret of type kubernetes.io/dockerconfigjson that can be used in Pod at imagePullSecrets field.
+</p> <p>The secret would be in format:</p> <div class="code-block"> <pre>apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+  namespace: awesomeapps
+data:
+  .dockerconfigjson: UmVhbGx5IHJlYWxseSByZWVlZWVlZWVlZWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGxsbGx5eXl5eXl5eXl5eXl5eXl5eXl5eSBsbGxsbGxsbGxsbGxsbG9vb29vb29vb29vb29vb29vb29vb29vb29vb25ubm5ubm5ubm5ubm5ubm5ubm5ubm5ubmdnZ2dnZ2dnZ2dnZ2dnZ2dnZ2cgYXV0aCBrZXlzCg==
+type: kubernetes.io/dockerconfigjson
+                    </pre> </div> <p class="para-content">
+And the pod.yaml will be like:
+</p> <div class="code-block"> <pre>apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+spec:
+  containers:
+  - image: ghcr.io/peek8/conscan:latest 
+    name: conscan-private-registry
+  imagePullSecrets:
+  - name: regcred
+                    </pre> </div> <p class="para-content">
+See more about using imagePullSecrets at <a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/">Kubernetes Private Registry doc.</a> </p> </div> </section> <!-- CI/CD --> <section class="section-light" id="cicd"> <div class="container"> <h2 class="section-title">CI/CD Integration</h2> <!-- <p class="section-subtitle">ConScan leverages well-established open-source security and compliance tools</p> --> <h3 id="github-action">Integration With Github Action</h3> <p class="para-content">
+We can easily use this conscan tool with github action. With the github action the html reports are generated and these reports can be published directly to GitHub Pages using GitHub Actions, no manual steps required 🚀.
+</p> <p>This makes it super easy to:</p> <div style="padding-left: 30px;"> <p>✅ Automate container image vulnerability scans</p> <p>✅ Host & share scan results securely</p> <p>✅ Integrate with your CI/CD workflow seamlessly</p> </div> <br> <p>Here’s a quick example of how it works:</p> <ul style="padding-left: 30px;"> <li>Actions runs on each push</li> <li>conscan scans all container images</li> <li>Reports are committed and published automatically to the eg. gh-pages branch</li> <li>Accessible instantly at GitHub Pages link.</li> </ul> <br> <p class="para-content">
+I have setup <a href="https://github.com/peek8/conscan-sample">a github repo named conscan-sample</a> where we are building some sample images (those images doesn't have any real use case, just for testing) 
+                    and scanning them with <a href="https://github.com/peek8/conscan">conscan tool</a> and publish the report to github pages.
+                    For more details, See the scan Job and update-index Job at the <a href="https://github.com/peek8/conscan-sample/blob/main/.github/workflows/build.yaml#L63-L111">github action workflows at conscan-sample repo</a>.
+
+                    The generated reports are available at <a href="https://peek8.github.io/conscan-sample/conscan-reports/">Conscan-sample Github Pages</a>.
+</p> <p class="para-content">
+Isn't it awesome, You can actually do a lot without doing almost anything (other than copy/paste) :).
+<br>
+Cheers, Happy Scanning !! 🎉 🎉
+</p> </div> </section> <!-- CLI Reference --> <section class="section-light" id="cli-ref"> <div class="container"> <h2 class="section-title">CLI Referece</h2> <h3>Synopsis</h3> <p class="para-content">
+Scanner for a container image for vulnerabilities, exposed secrets, inefficient file storage, installed packages and CIS(Center for Internet Security) Benchmarks.
+</p> <div class="code-block"> <pre>conscan scan [flags]  target 
+                    </pre> </div> <h3>Examples</h3> <div class="code-block"> <pre># Scan a container image locally available
+$ conscan scan yourimage:tag          // uses the Podman/Docker daemon for local images
+
+# Scan container images from registry eg. dockerhub
+$ conscan scan docker.io/yourimage:tag
+
+# or from github image repo
+$ conscan scan ghcr.io/yourimage:tag
+
+# By default the scan report will be in Table format that is more convenient for the Console output. 
+# If you want the report in json format, you can use
+$ conscan scan --format json -o report.json yourimage:tag # the report will be saved to report.json
+
+# Similary to save in html format:
+$ conscan scan --format html -o report.html yourimage:tag
+
+# By default, conscan will scan everything. If you are interested for specific scan report, eg only vulnerabilities and exposed secrets you can use like:
+$ conscan scan --scanners=vuln,secret yourimage:tag
+                    </pre> </div> <h3>Options</h3> <div class="code-block"> <pre>  -f, --format string      Format of the scanning report (default "table")
+  -h, --help               help for scan
+  -o, --output string      Output File name (optional)
+      --scanners strings   Comma-separated list of what type of scans to be performed (allowed values: [vuln secret package cis storage all]).
+                           By default, Every scan is performed. Except for 'table format', "Scanning" Packages is  excluded for the sake of brevity while the report is not written to Console (default [all])   
+                    </pre> </div> </div> </section> <!-- License --> <section class="section-light" id="license"> <div class="container"> <h2 class="section-title">License</h2> <p class="section-subtitle">ConScan is licensed under <a href="https://github.com/peek8/conscan/blob/main/LICENSE">Apache 2.0 license.</a></p> </div> </section> </div> <script>
+    function toggleMenu(button) {
+      const submenu = button.nextElementSibling;
+      const isVisible = submenu.style.display === 'block';
+      submenu.style.display = isVisible ? 'none' : 'block';
+    }
+  </script> </body></html>

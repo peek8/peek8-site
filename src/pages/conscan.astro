@@ -58,7 +58,7 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(180deg, var(--emerald-50) 0%, #ffffff 30%, #ffffff 70%, var(--teal-50) 100%);
+      /* background: linear-gradient(180deg, var(--emerald-50) 0%, #ffffff 30%, #ffffff 70%, var(--teal-50) 100%); */
       color: var(--slate-800);
       line-height: 1.6;
       min-height: 100vh;
@@ -156,7 +156,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, var(--emerald-100) 0%, transparent 70%);
+      /* background: radial-gradient(circle, var(--emerald-100) 0%, transparent 70%); */
       opacity: 0.6;
       pointer-events: none;
     }
@@ -165,12 +165,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, var(--emerald-100), var(--teal-100));
-      border: 1px solid var(--emerald-200);
+      background: #c6eeee26;
+      border: 1px solid #d1f1f4;
       padding: 8px 16px;
       border-radius: 50px;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: var(--emerald-700);
       margin-bottom: 24px;
     }
@@ -727,25 +727,9 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-content">
-      <a href="#" class="nav-brand">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="10" fill="url(#shield-grad)"/>
-          <path d="M20 8L10 12V20C10 26.63 14.27 32.79 20 34C25.73 32.79 30 26.63 30 20V12L20 8Z" fill="white" fill-opacity="0.9"/>
-          <path d="M18 22L15 19L13.59 20.41L18 24.82L26.59 16.23L25.17 14.82L18 22Z" fill="url(#check-grad)"/>
-          <defs>
-            <linearGradient id="shield-grad" x1="0" y1="0" x2="40" y2="40">
-              <stop stop-color="#10b981"/>
-              <stop offset="1" stop-color="#14b8a6"/>
-            </linearGradient>
-            <linearGradient id="check-grad" x1="13" y1="14" x2="27" y2="25">
-              <stop stop-color="#10b981"/>
-              <stop offset="1" stop-color="#059669"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        Conscan
-      </a>
+      <a href="/"><img src="/logo.png" width="100px"></a>
       <div class="nav-links">
+        <a href="/">Home</a>
         <a href="#features">Features</a>
         <a href="#architecture">How It Works</a>
         <a href="#quickstart">Quick Start</a>
@@ -763,7 +747,8 @@
   <section class="hero">
     <div class="container">
       <div class="hero-badge">
-        🛡️ Container Security Scanner
+          <img src="conscan-logo.png" alt="conscan" style="width:40px;height:45px; vertical-align:middle;">
+                    Conscan - Container Scanner
       </div>
       <h1>Secure, Lean, and Compliant<br>Containers Made Simple</h1>
       <p class="hero-subtitle">
@@ -995,7 +980,7 @@ docker run --rm -it ghcr.io/peek8/conscan:latest scan alpine:latest</code>
             <div class="step-code">
               <code><span class="comment"># Download and install (example for macOS ARM64)</span>
 conscan_version=0.1.0-alpha1
-wget -qO- "https://github.com/peek8/conscan/releases/download/v${conscan_version}/conscan_${conscan_version}_darwin_arm64.tar.gz" | tar -xz -C /usr/local/bin conscan</code>
+wget -qO- {"https://github.com/peek8/conscan/releases/download/v${conscan_version}/conscan_${conscan_version}_darwin_arm64.tar.gz"} | tar -xz -C /usr/local/bin conscan</code>
             </div>
           </div>
         </div>
@@ -1023,7 +1008,7 @@ conscan scan --scanners=vuln,secret yourimage:tag</code>
 - name: Scan container image
   run: |
     docker run --rm ghcr.io/peek8/conscan:latest \
-      scan ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}</code>
+      scan {"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"}</code>
             </div>
           </div>
         </div>
@@ -1057,7 +1042,7 @@ conscan scan --scanners=vuln,secret yourimage:tag</code>
     </div>
   </footer>
 
-  <script>
+  <script is:inline>
     function copyCode(btn) {
       const code = btn.previousElementSibling.textContent.replace('$ ', '');
       navigator.clipboard.writeText(code).then(() => {

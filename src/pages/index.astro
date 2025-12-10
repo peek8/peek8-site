@@ -1,16 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro"
-import Service from "../components/Service.astro"
-import Product from "../components/Product.astro"
-import About from "../components/About.astro"
-import Contact from "../components/Contact.astro"
+import Nav from "../components/Nav.astro"
+import Hero from "../components/home/Hero.astro"
+import Service from "../components/home/Service.astro"
+import FeatureProduct from "../components/home/FeatureProduct.astro"
+import Products from "../components/home/Products.astro"
+import About from "../components/home/About.astro"
+import Contact from "../components/home/Contact.astro"
+import Footer from "../components/Footer.astro"
 ---
 
 <Layout>
+    <Nav />
     <Hero />
     <Service />
-    <Product />
+    <FeatureProduct />
+    <Products />
     <About />
     <Contact />
+    <Footer />
 </Layout>

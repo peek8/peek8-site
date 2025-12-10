@@ -1,0 +1,93 @@
+<!-- ConScan Featured Section -->
+<section id="conscan" class="conscan-section">
+    <div class="container">
+        <div class="conscan-container">
+            <div class="conscan-content fade-in">
+                <span class="conscan-badge">🔥 Featured Product</span>
+                <h2 class="conscan-title">ConScan</h2>
+                <p class="conscan-description">
+                    Comprehensive container security scanning that goes beyond
+                    basic vulnerability detection. Protect your containerized
+                    applications with enterprise-grade security analysis.
+                </p>
+                <ul class="features-list">
+                    <li>Vulnerability scanning for known CVEs</li>
+                    <li>Exposed secrets & credential detection</li>
+                    <li>Inefficient file storage analysis</li>
+                    <li>Complete SBOM generation</li>
+                    <li>OS package inventory</li>
+                    <li>CIS Benchmark compliance checks</li>
+                </ul>
+                <div class="hero-buttons">
+                    <a
+                        href="https://peek8.io/conscan"
+                        class="btn btn-primary"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Learn More
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            ><path
+                                d="M3 8h10M9 4l4 4-4 4"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path></svg
+                        >
+                    </a>
+                    <a
+                        href="https://github.com/peek8/conscan"
+                        class="btn btn-secondary"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+            <div class="conscan-visual fade-in">
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span class="code-dot red"></span>
+                        <span class="code-dot yellow"></span>
+                        <span class="code-dot green"></span>
+                    </div>
+                    <code>
+                        <span class="prompt">$</span>
+                        <span class="command"
+                            >docker run --rm ghcr.io/peek8/conscan:latest scan
+                            alpine:latest</span
+                        >
+                    </code>
+                    <div class="terminal-output">
+                        <span class="terminal-line info"
+                            >🔍 Scanning alpine:latest...</span
+                        >
+                        <span class="terminal-line success"
+                            >✓ Vulnerability scan complete</span
+                        >
+                        <span class="terminal-line success"
+                            >✓ Secret detection complete</span
+                        >
+                        <span class="terminal-line success"
+                            >✓ SBOM generated</span
+                        >
+                        <span class="terminal-line success"
+                            >✓ CIS Benchmark checks passed</span
+                        >
+                        <span class="terminal-line warning"
+                            >⚠ 2 medium vulnerabilities found</span
+                        >
+                        <span class="terminal-line info"
+                            >📊 Full report saved to ./conscan-report.json</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

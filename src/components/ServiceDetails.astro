@@ -1,45 +1,312 @@
----
-import { serviceDetails } from "../content/services";
----
-
-<div id="service-detail" class="service-detail-page">
+<!-- Hero Section -->
+<header class="service-hero">
     <div class="container">
-        <section>
-            <div class="service-detail" id="service-detail-content">
-                <h1 class="service-detail-hero">Our Services</h1>
-                {
-                    serviceDetails.map((svc) => (
-                        <section id={svc.id}>
-                            <div class="service-detail-title">
-                                <div
-                                    class="service-icon"
-                                    style="margin-bottom: 2rem; font-size: 3rem;"
-                                >
-                                    {svc.icon}
-                                </div>
-                                <h2>{svc.title}</h2>
-                            </div>
-                            <p style="color: #6b7280; line-height: 1.8; font-size: 1.125rem; margin-bottom: 3rem;">
-                                {svc.description}
-                            </p>
-
-                            {svc.sections.map((sec) => (
-                                <div class="service-detail-section">
-                                    <h3>{sec.title}</h3>
-                                    {sec.content && <p>{sec.content}</p>}
-                                    {sec.list && (
-                                        <ul>
-                                            {sec.list.map((item) => (
-                                                <li>{item}</li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))}
-                        </section>
-                    ))
-                }
-            </div>
-        </section>
+        <div class="service-hero-badge">End-to-End Solutions</div>
+        <h1>
+            Our <span class="gradient-text">Services</span>
+        </h1>
+        <p class="service-hero-description">
+            Comprehensive cloud infrastructure, DevOps transformation, and
+            software development services designed to accelerate your digital
+            journey.
+        </p>
     </div>
-</div>
+</header>
+
+<!-- Multi-Cloud Section -->
+<section class="service-section" id="multicloud">
+    <div class="container">
+        <div class="service-grid">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper cloud">☁️</div>
+                <h2 class="service-title">
+                    Multi-Cloud Architecture & Deployment
+                </h2>
+                <p class="service-subtitle">
+                    Design, build, and manage cloud infrastructure across
+                    multiple cloud providers with our expert multi-cloud
+                    architecture services.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Cloud Strategy & Architecture</h3>
+                    <p>
+                        We help you develop a comprehensive cloud strategy that
+                        aligns with your business objectives. Our architects
+                        design scalable, resilient, and cost-effective solutions
+                        across AWS, Azure, and Google Cloud Platform.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>Key Benefits</h4>
+                    <p>
+                        Avoid vendor lock-in, optimize costs across providers,
+                        improve reliability with multi-region deployments, and
+                        leverage the best services from each cloud platform.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>What We Offer</h4>
+                <ul class="features-list">
+                    <li>Multi-cloud architecture design and implementation</li>
+                    <li>Cloud migration planning and execution</li>
+                    <li>Hybrid cloud integration</li>
+                    <li>Infrastructure as Code (Terraform, CloudFormation)</li>
+                    <li>Cloud cost optimization and FinOps</li>
+                    <li>Disaster recovery and business continuity</li>
+                    <li>High availability architectures</li>
+                    <li>Cloud-native application development</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Observability Section -->
+<section class="service-section" id="observability">
+    <div class="container">
+        <div class="service-grid reverse">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper observability">📊</div>
+                <h2 class="service-title">
+                    Logging, Monitoring & Observability
+                </h2>
+                <p class="service-subtitle">
+                    Gain complete visibility into your systems with
+                    comprehensive observability solutions that help you
+                    understand, troubleshoot, and optimize your infrastructure.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Comprehensive Observability</h3>
+                    <p>
+                        Move beyond basic monitoring to true observability. We
+                        implement solutions that provide deep insights into
+                        system behavior, application performance, and user
+                        experience across your entire stack.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>Key Outcomes</h4>
+                    <p>
+                        Reduce MTTD and MTTR, proactively identify issues before
+                        they impact users, make data-driven decisions, and
+                        ensure compliance with logging requirements.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>Our Solutions</h4>
+                <ul class="features-list">
+                    <li>Centralized logging with ELK Stack, Splunk, Datadog</li>
+                    <li>Real-time metrics with Prometheus, Grafana</li>
+                    <li>Distributed tracing for microservices</li>
+                    <li>Application Performance Monitoring (APM)</li>
+                    <li>Custom dashboards and visualization</li>
+                    <li>Intelligent alerting and incident management</li>
+                    <li>Log aggregation and analysis</li>
+                    <li>Synthetic monitoring and uptime checks</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Security Section -->
+<section class="service-section" id="security">
+    <div class="container">
+        <div class="service-grid">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper security">🔒</div>
+                <h2 class="service-title">Security & Compliance Automation</h2>
+                <p class="service-subtitle">
+                    Protect your infrastructure and applications with automated
+                    security controls, compliance monitoring, and proactive
+                    threat detection.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Security-First Approach</h3>
+                    <p>
+                        We embed security into every layer of your
+                        infrastructure. From network security to
+                        application-level controls, we implement
+                        defense-in-depth strategies that protect your assets
+                        while maintaining operational efficiency.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>Compliance Made Easy</h4>
+                    <p>
+                        Automate compliance checks, generate audit reports, and
+                        maintain continuous compliance with SOC 2, HIPAA,
+                        PCI-DSS, and GDPR standards.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>Security Services</h4>
+                <ul class="features-list">
+                    <li>Zero-trust architecture implementation</li>
+                    <li>Identity and Access Management (IAM)</li>
+                    <li>Network security and segmentation</li>
+                    <li>Container and Kubernetes security</li>
+                    <li>Secrets management (Vault, AWS Secrets Manager)</li>
+                    <li>Security scanning and vulnerability assessment</li>
+                    <li>Compliance automation (SOC 2, HIPAA, PCI-DSS)</li>
+                    <li>Penetration testing and security audits</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DevOps Section -->
+<section class="service-section" id="devops">
+    <div class="container">
+        <div class="service-grid reverse">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper devops">⚡</div>
+                <h2 class="service-title">DevOps Transformation</h2>
+                <p class="service-subtitle">
+                    Accelerate software delivery with modern DevOps practices,
+                    CI/CD automation, and cultural transformation that enables
+                    rapid innovation.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Transform Your Delivery Pipeline</h3>
+                    <p>
+                        We help organizations adopt DevOps practices that break
+                        down silos, automate repetitive tasks, and enable teams
+                        to deliver software faster and more reliably.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>Measurable Results</h4>
+                    <p>
+                        Reduce deployment time from weeks to hours, increase
+                        deployment frequency, lower change failure rates, and
+                        improve mean time to recovery.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>DevOps Services</h4>
+                <ul class="features-list">
+                    <li>CI/CD pipeline design and implementation</li>
+                    <li>GitOps and version control best practices</li>
+                    <li>Container orchestration with Kubernetes</li>
+                    <li>Infrastructure as Code automation</li>
+                    <li>Release management and deployment strategies</li>
+                    <li>Environment provisioning and management</li>
+                    <li>DevOps toolchain integration</li>
+                    <li>Team training and cultural transformation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Development Section -->
+<section class="service-section" id="development">
+    <div class="container">
+        <div class="service-grid">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper development">💻</div>
+                <h2 class="service-title">Full-Stack Software Development</h2>
+                <p class="service-subtitle">
+                    Build scalable, performant applications with our full-stack
+                    development services covering both frontend and backend
+                    technologies.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Custom Software Solutions</h3>
+                    <p>
+                        From concept to deployment, we build custom software
+                        solutions tailored to your specific business
+                        requirements. Our experienced developers work with
+                        modern frameworks and best practices.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>Quality Assurance</h4>
+                    <p>
+                        Every application includes comprehensive testing,
+                        performance optimization, security hardening, and
+                        documentation. We deliver production-ready software that
+                        scales.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>Development Capabilities</h4>
+                <ul class="features-list">
+                    <li>Frontend development (React, Vue.js, Angular)</li>
+                    <li>Backend development (Node.js, Python, Go, Java)</li>
+                    <li>RESTful and GraphQL API design</li>
+                    <li>Microservices architecture</li>
+                    <li>Database design and optimization</li>
+                    <li>Mobile app development</li>
+                    <li>Progressive Web Applications (PWA)</li>
+                    <li>Third-party API integrations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Automation Section -->
+<section class="service-section" id="automation">
+    <div class="container">
+        <div class="service-grid reverse">
+            <div class="service-content fade-in">
+                <div class="service-icon-wrapper automation">🤖</div>
+                <h2 class="service-title">Business Process Automation</h2>
+                <p class="service-subtitle">
+                    Streamline operations and reduce manual effort by automating
+                    repetitive business processes and workflows.
+                </p>
+
+                <div class="service-subsection">
+                    <h3>Intelligent Automation</h3>
+                    <p>
+                        Identify opportunities for automation across your
+                        organization and implement solutions that save time,
+                        reduce errors, and free your team to focus on high-value
+                        activities.
+                    </p>
+                </div>
+
+                <div class="benefits-box">
+                    <h4>ROI-Driven Approach</h4>
+                    <p>
+                        We focus on automation opportunities with the highest
+                        return on investment, ensuring measurable benefits and
+                        quick time-to-value for your organization.
+                    </p>
+                </div>
+            </div>
+            <div class="features-card fade-in">
+                <h4>Automation Solutions</h4>
+                <ul class="features-list">
+                    <li>Workflow automation and orchestration</li>
+                    <li>Data pipeline automation</li>
+                    <li>Report generation and distribution</li>
+                    <li>API integrations between systems</li>
+                    <li>Automated testing and quality checks</li>
+                    <li>Email and notification automation</li>
+                    <li>File processing and data transformation</li>
+                    <li>Scheduled job management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

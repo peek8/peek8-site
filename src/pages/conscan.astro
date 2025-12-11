@@ -1,3 +1,7 @@
+---
+import Contact from "../components/home/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1037,11 +1041,13 @@ conscan scan --scanners=vuln,secret yourimage:tag</code>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <!-- <footer>
     <div class="container">
       <p>Conscan is open source under the <a href="https://github.com/peek8/conscan/blob/main/LICENSE" target="_blank">Apache 2.0 License</a></p>
     </div>
-  </footer>
+  </footer> -->
+
+  <Footer />
 
   <script is:inline>
     function copyCode(btn) {

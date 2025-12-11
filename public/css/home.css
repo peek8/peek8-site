@@ -665,6 +665,58 @@ section {
     background: #f1f5f9;
 }
 
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.highlight-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    transition: all var(--transition-smooth);
+}
+
+.highlight-card:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+}
+
+.highlight-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-subtle);
+    border-radius: 16px;
+    font-size: 1.75rem;
+}
+
+.highlight-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.highlight-card p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.about-cta {
+    text-align: center;
+    margin-top: 48px;
+}
+
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -738,6 +790,10 @@ section {
     .about-content {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .about-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-grid {

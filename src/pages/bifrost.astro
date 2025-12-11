@@ -1,3 +1,7 @@
+---
+import Footer from "../components/Footer.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -931,7 +935,7 @@ spec:
   </section>
 
   <!-- Footer -->
-  <footer>
+  <!-- <footer>
     <div class="footer-content">
       <div class="footer-links">
         <a href="https://github.com/peek8/bifrost" target="_blank" rel="noopener">GitHub</a>
@@ -940,9 +944,11 @@ spec:
       </div>
       <p class="footer-copy">Built with 💜 by <a href="https://github.com/peek8" style="color: var(--bifrost-violet); text-decoration: none;">peek8</a></p>
     </div>
-  </footer>
+  </footer> -->
 
-  <script>
+  <Footer />
+
+  <script is:inline>
     function copyCode(btn, text) {
       navigator.clipboard.writeText(text).then(() => {
         btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>';

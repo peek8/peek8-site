@@ -18,6 +18,11 @@
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-glow: 0 0 60px var(--color-primary-glow);
     --shadow-card: 0 4px 24px rgba(185, 142, 142, 0.08);
+
+    /*For Meeting button*/
+    --accent: #F59E0C;
+    --accent-light: #fbbf24;
+    --accent-dark: #d97706;
 }
 
 
@@ -216,6 +221,16 @@ body {
     background: #2cb1bf;
     transform: translateY(-2px);
     box-shadow: var(--shadow-glow);
+}
+
+.btn-meeting {
+    background: var(--accent);
+    color: var(--color-text);
+}
+
+.btn-meeting:hover {
+    background: var(--accent-light);
+    transform: translateY(-1px);
 }
 
 .btn-secondary {

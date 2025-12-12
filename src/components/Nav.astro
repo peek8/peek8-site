@@ -1,14 +1,16 @@
 <!-- Navigation -->
 <nav class="nav">
     <div class="container nav-container">
-        <img src="/logo.png" width="100px" />
+        <a href="/"><img src="/logo.png" width="100px" /></a>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="/#services">Services</a></li>
-            
+
             <!-- <li><a href="#products">Products</a></li> -->
             <li class="dropdown">
-                <a href="/#products"><span class="dropdown-toggle">Products ▾</span></a>
+                <a href="/#products"
+                    ><span class="dropdown-toggle">Products ▾</span></a
+                >
                 <ul class="dropdown-menu">
                     <li><a href="/conscan">ConScan</a></li>
                     <li><a href="/bifrost">Bifrost</a></li>
@@ -17,15 +19,37 @@
             </li>
             <li><a href="/#about">About</a></li>
             <li>
-                <a href="/#contact" class="btn btn-primary" style="color: white;"
-                    >Contact Us</a
+                <a
+                    href="/#contact"
+                    class="btn btn-primary"
+                    style="color: white;">Contact Us</a
                 >
             </li>
         </ul>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMobileMenu()">
             <span></span>
             <span></span>
             <span></span>
         </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="/" onclick="closeMobileMenu()">Home</a></li>
+            <li>
+                <a href="/#services" onclick="closeMobileMenu()">Services</a>
+            </li>
+            <li>
+                <a href="/#products" onclick="closeMobileMenu()">Products</a>
+            </li>
+            <li><a href="/#about" onclick="closeMobileMenu()">About</a></li>
+            <li>
+                <a
+                    href="/#contact"
+                    class="btn btn-primary"
+                    onclick="closeMobileMenu()">Contact Us</a>
+            </li>
+        </ul>
     </div>
 </nav>

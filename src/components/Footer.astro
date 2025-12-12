@@ -3,7 +3,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo" style="color: #f1f5f9;">
+                <a href="/" class="logo" style="text-decoration: none;">
                     <!-- <svg
                         class="logo-icon"
                         viewBox="0 0 40 40"
@@ -43,7 +43,8 @@
                     <li><a href="/services/#devops">DevOps</a></li>
                     <li>
                         <a href="/services/#development"
-                            >Full-Stack Development</a>
+                            >Full-Stack Development</a
+                        >
                     </li>
                 </ul>
             </div>
@@ -59,7 +60,7 @@
                 <h4>Company</h4>
                 <ul class="footer-links">
                     <li><a href="/about-us">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/#contact">Contact</a></li>
                     <li>
                         <a
                             href="https://github.com/peek8"
@@ -214,6 +215,29 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--color-text);
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .logo-text span {
+        color: var(--color-primary);
     }
 
     /* Responsive */

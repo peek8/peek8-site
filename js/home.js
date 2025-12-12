@@ -24,3 +24,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+function closeMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    mobileMenu.classList.remove('active');
+    mobileMenuBtn.classList.remove('active');
+}
+
+function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    mobileMenu.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+}
+
+window.closeMobileMenu = closeMobileMenu
+window.toggleMobileMenu = toggleMobileMenu

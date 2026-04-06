@@ -1068,6 +1068,63 @@ import Footer from "../components/Footer.astro";
         box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
       }
 
+      .ai-explain-section {
+        padding: 80px 0;
+        background: linear-gradient(
+          180deg,
+          #f5f3ff 0%,
+          #ede9fe 50%,
+          #f5f3ff 100%
+        );
+      }
+
+      .ai-features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 48px;
+      }
+      @media (max-width: 768px) {
+        .ai-features-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .ai-feature-card {
+        background: white;
+        border: 1px solid #ddd6fe;
+        border-radius: 16px;
+        padding: 32px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .ai-feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(139, 92, 246, 0.15);
+        border-color: #a78bfa;
+      }
+      .ai-feature-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+      }
+      .ai-feature-card h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .ai-feature-card p {
+        font-size: 0.9rem;
+        color: var(--slate-500);
+        line-height: 1.6;
+      }
+
       /* CTA Section */
       .cta {
         padding: 100px 0;
@@ -1664,6 +1721,101 @@ import Footer from "../components/Footer.astro";
       </div>
     </section>
 
+    <!-- Explain with AI Section -->
+    <section class="ai-explain-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="premium-header">
+            <p class="section-label" style="margin-bottom:0;">
+              Premium Feature
+            </p>
+            <span class="premium-badge">⭐ Premium</span>
+          </div>
+          <h2 class="section-title">Explain with AI</h2>
+          <p class="section-desc">
+            Click "Explain with AI" on any scan report row to get instant,
+            human-readable explanations of vulnerabilities, CIS benchmarks, and
+            packages — no security expertise required.
+          </p>
+        </div>
+
+        <!-- GIF Screenshot Placeholder -->
+        <div
+          style="margin: 48px auto 0; max-width: 900px; border-radius: 16px; overflow: hidden; border: 2px solid #ddd6fe; background: linear-gradient(135deg, #ede9fe, #e0e7ff); aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;"
+        >
+          <img
+            src="/conscan-ai.gif"
+            alt="AI Explain Demo"
+            style="width:100%; height:auto;"
+          />
+        </div>
+        <div class="ai-features-grid">
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon">
+              <svg
+                width="28"
+                height="28"
+                fill="none"
+                stroke="#7c3aed"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 9v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"
+                ></path>
+              </svg>
+            </div>
+            <h4>Vulnerability Explainer</h4>
+            <p>
+              Understand what each CVE means, its real-world impact, and
+              actionable remediation steps — explained in plain language by AI.
+            </p>
+          </div>
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon">
+              <svg
+                width="28"
+                height="28"
+                fill="none"
+                stroke="#7c3aed"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                ></path>
+              </svg>
+            </div>
+            <h4>CIS Benchmark Insights</h4>
+            <p>
+              Get AI-powered breakdowns of each CIS benchmark check — why it
+              matters, what failed, and how to bring your image into compliance.
+            </p>
+          </div>
+          <div class="ai-feature-card">
+            <div class="ai-feature-icon">
+              <svg
+                width="28"
+                height="28"
+                fill="none"
+                stroke="#7c3aed"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                ></path>
+              </svg>
+            </div>
+            <h4>Package / SBOM Explorer</h4>
+            <p>
+              Ask AI about any package in your SBOM — what it does, known risks,
+              license implications, and whether safer alternatives exist.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Alert Rules Section -->
     <section class="alert-rules">
       <div class="container">
@@ -1731,7 +1883,8 @@ import Footer from "../components/Footer.astro";
                       >#security</code
                     >, <code
                       style="font-family:'JetBrains Mono',monospace;font-size:0.8rem;background:var(--slate-100);padding:2px 6px;border-radius:4px;"
-                      >#devops</code>
+                      >#devops</code
+                    >
                   </div>
                 </div>
               </div>
@@ -1798,11 +1951,11 @@ import Footer from "../components/Footer.astro";
             style="font-size:0.875rem;padding:6px 16px;"
             >⭐ Premium License Required</span
           >
-          <h3>Interested in the Dashboard &amp; Alerts?</h3>
+          <h3>Interested in Dashboard, AI Insights &amp; Alerts?</h3>
           <p>
-            The Dashboard and Smart Alert Rules are premium features not
-            included in the open source release. Contact us to get your license
-            and unlock these capabilities for your team.
+            The Dashboard, Explain with AI, and Smart Alert Rules are premium
+            features not included in the open source release. Contact us to get
+            your license and unlock these capabilities for your team.
           </p>
           <a href="mailto:hello@peek8.io" class="btn-premium">
             <svg

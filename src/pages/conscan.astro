@@ -1228,6 +1228,8 @@ import Footer from "../components/Footer.astro";
           <a href="/">Home</a>
           <a href="#features">Features</a>
           <a href="#architecture">How It Works</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#pricing">Free vs Premium</a>
           <a href="#quickstart">Quick Start</a>
           <a
             href="https://github.com/peek8/conscan"
@@ -1256,11 +1258,14 @@ import Footer from "../components/Footer.astro";
           />
           Conscan - Container Scanner
         </div>
-        <h1>Secure, Lean, and Compliant<br />Containers Made Simple</h1>
+
+        <h1>All-in-One Container Security — In a Single Command</h1>
+        <p class="hero-subtitle"></p>
         <p class="hero-subtitle">
-          Scan container images for vulnerabilities, exposed secrets,
-          inefficient storage, SBOM generation, and CIS Benchmark checks — all
-          in one command.
+          Stop juggling multiple tools like Trivy, Grype, Syft, and Dockle. <br
+          /> ConScan scans container images for vulnerabilities, exposed secrets,
+          inefficient storage, SBOM generation, and CIS Benchmark checks — all in
+          one command.
         </p>
         <div class="hero-buttons">
           <a href="#quickstart" class="btn-primary">
@@ -1363,6 +1368,23 @@ import Footer from "../components/Footer.astro";
             <p>
               Validates images against Center for Internet Security (CIS)
               recommendations for compliance.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>AI Integration</h3>
+            <p>
+              You can ask Conscan to explain vulnerabilities, CIS benchmarks,
+              Packages in plain English with risk assessments and suggested
+              fixes — all powered by AI.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔔</div>
+            <h3>Notifications</h3>
+            <p>
+              Set up custom alert rules to get notified of critical findings via
+              Slack or email.
             </p>
           </div>
           <div class="feature-card">
@@ -1542,7 +1564,7 @@ import Footer from "../components/Footer.astro";
               <div class="step-code">
                 <code
                   ><span class="comment"># Scan any container image</span>
-                  docker run --rm -it ghcr.io/peek8/conscan:latest scan alpine:latest</code
+                  $ docker run --rm -it ghcr.io/peek8/conscan:latest scan alpine:latest</code
                 >
               </div>
             </div>
@@ -1557,7 +1579,7 @@ import Footer from "../components/Footer.astro";
                   ><span class="comment"
                     ># Download and install (example for macOS ARM64)</span
                   >
-                  conscan_version=0.1.0-alpha1 wget -qO- {
+                  $ conscan_version=v0.1.5 wget -qO- {
                     "https://github.com/peek8/conscan/releases/download/v${conscan_version}/conscan_${conscan_version}_darwin_arm64.tar.gz"
                   } | tar -xz -C /usr/local/bin conscan</code
                 >
@@ -1572,10 +1594,10 @@ import Footer from "../components/Footer.astro";
               <div class="step-code">
                 <code
                   ><span class="comment"># Full scan with HTML report</span>
-                  conscan scan --format html --output report.html yourimage:tag
+                  $ conscan scan --format html --output report.html yourimage:tag
 
                   <span class="comment"># Scan specific categories only</span>
-                  conscan scan --scanners=vuln,secret yourimage:tag</code
+                  $ conscan scan --scanners=vuln,secret yourimage:tag</code
                 >
               </div>
             </div>
@@ -1592,10 +1614,20 @@ import Footer from "../components/Footer.astro";
                 <code
                   ><span class="comment"># In your GitHub Actions workflow</span
                   >
-                  - name: Scan container image run: | docker run --rm ghcr.io/peek8/conscan:latest
-                  \ scan {"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"}</code
+                  - run: | docker run --rm ghcr.io/peek8/conscan:latest \ scan {
+                    "${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+                  }</code
                 >
               </div>
+              <p style="margin-top:12px;">
+                For more details, See the "scan" Job and "update-index" Job at
+                the
+                <a
+                  href="https://github.com/peek8/conscan-sample/blob/main/.github/workflows/build.yaml#L63-L111"
+                  target="_blank"
+                  >github action workflows at conscan-sample repo</a
+                >.
+              </p>
             </div>
           </div>
         </div>
@@ -1977,6 +2009,235 @@ import Footer from "../components/Footer.astro";
       </div>
     </section>
 
+    <!-- FREE vs PREMIUM Section -->
+    <section id="pricing" style="padding:100px 0;">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:48px;">
+          <span
+            class="premium-badge"
+            style="font-size:0.875rem;padding:6px 16px;margin-bottom:16px;display:inline-block;"
+            >⚖️ Compare Plans</span
+          >
+          <h2
+            style="font-size:2.25rem;font-weight:800;color:var(--slate-900);margin-bottom:12px;"
+          >
+            FREE vs PREMIUM
+          </h2>
+          <p
+            style="font-size:1.1rem;color:var(--slate-500);max-width:600px;margin:0 auto;"
+          >
+            Everything you need to secure containers — choose the plan that fits
+            your team.
+          </p>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table
+            style="width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--slate-200);border-radius:16px;overflow:hidden;font-size:0.95rem;"
+          >
+            <thead>
+              <tr>
+                <th
+                  style="text-align:left;padding:20px 24px;background:var(--slate-50);font-weight:700;color:var(--slate-700);border-bottom:2px solid var(--slate-200);width:40%;"
+                  >Feature</th
+                >
+                <th
+                  style="text-align:center;padding:20px 24px;background:var(--slate-50);font-weight:700;color:var(--emerald-700);border-bottom:2px solid var(--slate-200);width:30%;"
+                  >🟢 Free (Open Source)</th
+                >
+                <th
+                  style="text-align:center;padding:20px 24px;background:linear-gradient(135deg,#fffbeb,#fef3c7);font-weight:700;color:var(--amber-700,#b45309);border-bottom:2px solid var(--slate-200);width:30%;"
+                  >⭐ Premium</th
+                >
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Vulnerability Scanning</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr style="background:var(--slate-50);">
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Secret Detection</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr>
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >SBOM Generation</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr style="background:var(--slate-50);">
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >CIS Benchmark Checks</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr>
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Image Size Analysis</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr style="background:var(--slate-50);">
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >CLI Reports (JSON / Table)</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr>
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Scan Report Dashboard</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;color:var(--slate-300);"
+                  >—</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr style="background:var(--slate-50);">
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Smart Alert Rules</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;color:var(--slate-300);"
+                  >—</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr>
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Slack Notifications</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;color:var(--slate-300);"
+                  >—</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr style="background:var(--slate-50);">
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);font-weight:600;color:var(--slate-700);"
+                  >Email Notifications</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;color:var(--slate-300);"
+                  >—</td
+                >
+                <td
+                  style="padding:16px 24px;border-bottom:1px solid var(--slate-100);text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+              <tr>
+                <td
+                  style="padding:16px 24px;font-weight:600;color:var(--slate-700);"
+                  >Explain with AI</td
+                >
+                <td
+                  style="padding:16px 24px;text-align:center;font-size:1.25rem;color:var(--slate-300);"
+                  >—</td
+                >
+                <td
+                  style="padding:16px 24px;text-align:center;font-size:1.25rem;"
+                  >✅</td
+                >
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align:center;margin-top:40px;">
+          <p style="font-size:1rem;color:var(--slate-500);margin-bottom:20px;">
+            Want to unlock Premium features for your team?
+          </p>
+          <a
+            href="mailto:hello@peek8.io"
+            class="btn-premium"
+            style="display:inline-flex;"
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,12 2,6"></polyline>
+            </svg>
+            Contact us — hello@peek8.io
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta">
       <div class="container">
@@ -2008,13 +2269,6 @@ import Footer from "../components/Footer.astro";
         </div>
       </div>
     </section>
-
-    <!-- Footer -->
-    <!-- <footer>
-    <div class="container">
-      <p>Conscan is open source under the <a href="https://github.com/peek8/conscan/blob/main/LICENSE" target="_blank">Apache 2.0 License</a></p>
-    </div>
-  </footer> -->
 
     <Footer />
 
